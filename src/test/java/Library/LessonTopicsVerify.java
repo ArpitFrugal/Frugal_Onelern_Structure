@@ -43,7 +43,7 @@ public class LessonTopicsVerify extends Base {
     public void ThreadSleep5000() throws InterruptedException {
         Thread.sleep(5000);
     }
-    public void Validate(String unitname, String text){
+    public void LessonTopicValidate(String unitname, String text){
         System.out.println(unitname + "\n" + text);
         if(unitname.contains(text)){
             System.out.println("PASSED");
@@ -86,7 +86,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EnvFirstLessonFirstTopicRefGrade1().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -100,7 +100,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EnvFirstLessonSecondTopicRefGrade1().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -114,7 +114,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EnvFirstLessonThirdTopicRefGrade1().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -138,7 +138,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngThirdLessonFirstTopicRefGrade2().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -152,7 +152,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngThirdLessonSecondTopicRefGrade2().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -166,7 +166,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngThirdLessonThirdTopicRefGrade2().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -190,7 +190,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonFirstTopicRefGrade3().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -204,7 +204,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonSecondTopicRefGrade3().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -218,7 +218,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonThirdTopicRefGrade3().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -244,7 +244,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngFirstLessonFirstTopicRefGrade4().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -258,7 +258,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngFirstLessonSecondTopicRefGrade4().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -272,7 +272,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngFirstLessonThirdTopicRefGrade4().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -298,7 +298,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonFirstTopicRefGrade5().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -312,7 +312,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonSecondTopicRefGrade5().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -326,7 +326,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonThirdTopicRefGrade5().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -368,7 +368,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EnvFirstLessonFirstTopicRefGrade1().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -382,7 +382,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EnvFirstLessonSecondTopicRefGrade1().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -396,7 +396,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EnvFirstLessonThirdTopicRefGrade1().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -420,7 +420,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngThirdLessonFirstTopicRefGrade2().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -434,7 +434,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngThirdLessonSecondTopicRefGrade2().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -448,7 +448,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngThirdLessonThirdTopicRefGrade2().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -472,7 +472,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonFirstTopicRefGrade3().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -486,7 +486,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonSecondTopicRefGrade3().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -500,7 +500,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonThirdTopicRefGrade3().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -526,7 +526,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngFirstLessonFirstTopicRefGrade4().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -540,7 +540,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngFirstLessonSecondTopicRefGrade4().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -554,7 +554,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.EngFirstLessonThirdTopicRefGrade4().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -580,7 +580,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonFirstTopicRefGrade5().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -594,7 +594,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonSecondTopicRefGrade5().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -608,7 +608,7 @@ public class LessonTopicsVerify extends Base {
             text = lib.MathFirstLessonThirdTopicRefGrade5().getText();
             ThreadSleep5000();
 
-            Validate(unitname, text);
+            LessonTopicValidate(unitname, text);
 
             lib.BackButton().click();
             ThreadSleep5000();

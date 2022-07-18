@@ -42,7 +42,7 @@ public class WorkbookNameVerify extends Base {
 	public void ThreadSleep5000() throws InterruptedException {
 		Thread.sleep(5000);
 	}
-	public void ValidateTest(String expected_text, String actual_text){
+	public void WorkbookNameValidateTest(String expected_text, String actual_text){
 		if(actual_text.equals(expected_text)){
 			System.out.println("PASSED");
 		}
@@ -74,7 +74,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "Environmental Studies Coursebook - Part A";
 			
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 
 		else if (mob >= 9000000021l && mob <= 9000000040l) { // English Coursebook - Part A
@@ -86,7 +86,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "English Coursebook - Part A";
 
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 		else if (mob >= 9000000041l && mob <= 9000000060l) { // Mathematics Coursebook - Part A
 			WebElement element = lib.MathematicsCoursebookGrade3();
@@ -97,7 +97,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "Mathematics Coursebook - Part A";
 
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 
 		else if (mob >= 9000000061l && mob <= 9000000080l) { // English Coursebook - Part A
@@ -109,7 +109,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "English Coursebook - Part A";
 
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 
 		else if (mob >= 9000000081l && mob <= 9000000100l) { // Mathematics Coursebook - Part A
@@ -121,7 +121,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "Mathematics Coursebook - Part A";
 
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 
 	}
@@ -150,7 +150,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "Environmental Studies Coursebook - Part A";
 
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 
 		else if (mob >= 9000000105l && mob <= 9000000108l) { // English Coursebook - Part A
@@ -162,7 +162,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "English Coursebook - Part A";
 
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 
 		else if (mob >= 9000000109l && mob <= 9000000112l) { // Mathematics Coursebook - Part A
@@ -174,7 +174,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "Mathematics Coursebook - Part A";
 
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 
 		else if (mob >= 9000000113l && mob <= 9000000116l) { // English Coursebook - Part A
@@ -186,7 +186,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "English Coursebook - Part A";
 
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 
 		else if (mob >= 9000000117l && mob <= 9000000120l) { // Mathematics Coursebook - Part A
@@ -198,7 +198,7 @@ public class WorkbookNameVerify extends Base {
 			String text = lib.WorkbookHeading().getText();
 			String workbookName = "Mathematics Coursebook - Part A";
 
-			ValidateTest(workbookName, text);
+			WorkbookNameValidateTest(workbookName, text);
 		}
 
 	}

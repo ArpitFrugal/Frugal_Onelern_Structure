@@ -42,7 +42,7 @@ public class SearchCheck extends Base {
     }
 
 
-    public void ValidateTest(int expected_count, int countInSearchBox, int search_elements_size){
+    public void SearchCheckValidateTest(int expected_count, int countInSearchBox, int search_elements_size){
         System.out.println(expected_count +" "+ countInSearchBox+ " "+search_elements_size);
         if(countInSearchBox == expected_count && search_elements_size == expected_count ){
             System.out.println("PASSED");
@@ -87,7 +87,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
         else if (mob >= 9000000021l && mob <= 9000000040l){ // English Coursebook - Part A
@@ -112,7 +112,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
         else if (mob >= 9000000041l && mob <= 9000000060l){ // Mathematics Coursebook - Part A
@@ -137,7 +137,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
         else if (mob >= 9000000061l && mob <= 9000000080l){ // English Coursebook - Part A
@@ -162,7 +162,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
         else if (mob >= 9000000081l && mob <= 9000000100l){ // English Coursebook - Part A
@@ -187,7 +187,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
 
@@ -227,7 +227,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
         else if (mob >= 9000000105l && mob <= 9000000108l){ // English Coursebook - Part A
@@ -252,7 +252,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
         else if (mob >= 9000000109l && mob <= 9000000112l){ // Mathematics Coursebook - Part A
@@ -277,7 +277,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
         else if (mob >= 9000000113l && mob <= 9000000116l){ // English Coursebook - Part A
@@ -302,7 +302,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
         else if (mob >= 9000000117l && mob <= 9000000120l){ // English Coursebook - Part A
@@ -327,7 +327,7 @@ public class SearchCheck extends Base {
             int countInSearchBox= Integer.parseInt(lib.TotalCount());
             int search_elements_size = search_elements.size();
 
-            ValidateTest(expected_count, countInSearchBox, search_elements_size);
+            SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
 
         }
 

@@ -37,7 +37,7 @@ public class GradeCheck extends Base {
 	public void ThreadSleep5000() throws InterruptedException {
 		Thread.sleep(5000);
 	}
-	public void ValidateTest(String actual_grade, String expected_grade){
+	public void GradeCheckValidateTest(String actual_grade, String expected_grade){
 		if (actual_grade.equals(expected_grade)) {
 			System.out.println("PASSED");
 		} else {
@@ -62,14 +62,14 @@ public class GradeCheck extends Base {
 			String actual_grade = lib.EnglishGradeTextGrade1().getText();
 			String expected_grade = "GRADE 1";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 		}
 
 		else if (mob >= 9000000021l && mob <= 9000000040l) {// English
 			String actual_grade = lib.EnglishGradeTextGrade2().getText();
 			String expected_grade = "GRADE 2";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 
 		}
 
@@ -77,21 +77,21 @@ public class GradeCheck extends Base {
 			String actual_grade = lib.EnglishGradeTextGrade3().getText();
 			String expected_grade = "GRADE 3";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 		}
 
 		else if (mob >= 9000000061l && mob <= 9000000080l) {
 			String actual_grade = lib.EnglishGradeTextGrade4().getText();
 			String expected_grade = "GRADE 4";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 		}
 
 		else if (mob >= 9000000081l && mob <= 9000000100l) {
 			String actual_grade = lib.EnglishGradeTextGrade5().getText();
 			String expected_grade = "GRADE 5";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 		}
 
 	}
@@ -110,35 +110,35 @@ public class GradeCheck extends Base {
 			String actual_grade = lib.EnglishGradeTextGrade1().getText();
 			String expected_grade = "GRADE 1";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 		}
 
 		else if (mob >= 9000000105l && mob <= 9000000108l) {
 			String actual_grade = lib.EnglishGradeTextGrade2().getText();
 			String expected_grade = "GRADE 2";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 		}
 
 		else if (mob >= 9000000109l && mob <= 9000000112l) {
 			String actual_grade = lib.EnglishGradeTextGrade3().getText();
 			String expected_grade = "GRADE 3";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 		}
 
 		else if (mob >= 9000000113l && mob <= 9000000116l) {
 			String actual_grade = lib.EnglishGradeTextGrade4().getText();
 			String expected_grade = "GRADE 4";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 		}
 
 		else if (mob >= 9000000117l && mob <= 9000000120l) {
 			String actual_grade = lib.EnglishGradeTextGrade5().getText();
 			String expected_grade = "GRADE 5";
 
-			ValidateTest(actual_grade, expected_grade);
+			GradeCheckValidateTest(actual_grade, expected_grade);
 		}
 
 	}

@@ -22,7 +22,7 @@ public class UserSignInFunctionality extends Base {
 	public WebDriver driver;
 	public LoginMethods logmethods;
 	public String student = "student";
-	public String teacher = "student";
+	public String teacher = "teacher";
 
 	@BeforeMethod // Method will work before each method inside this class
 	public void standardLogic() throws IOException {

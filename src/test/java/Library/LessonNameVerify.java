@@ -79,7 +79,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -96,7 +96,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -112,7 +112,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -138,7 +138,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -155,7 +155,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -171,7 +171,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -194,7 +194,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -211,7 +211,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -227,7 +227,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -252,7 +252,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -269,7 +269,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -285,7 +285,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -310,7 +310,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -327,7 +327,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -343,7 +343,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -353,7 +353,7 @@ public class LessonNameVerify extends Base {
 
     }
 
-    private void Validate(String unitName, String text, String insideHeading) {
+    private void LessonNameValidate(String unitName, String text, String insideHeading) {
         System.out.println(unitName + "\n" + text +"\n" + insideHeading);
         if(unitName.equals(text) && text.equals(insideHeading)){
             System.out.println("PASSED");
@@ -396,7 +396,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -413,7 +413,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -429,7 +429,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -455,7 +455,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -472,7 +472,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -488,7 +488,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -511,7 +511,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -528,7 +528,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -544,7 +544,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -569,7 +569,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -586,7 +586,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -602,7 +602,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -627,7 +627,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -644,7 +644,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();
@@ -660,7 +660,7 @@ public class LessonNameVerify extends Base {
             ThreadSleep5000();
             insideHeading = lib.InsideLessonHeading().getText();
 
-            Validate(unitName, text, insideHeading);
+            LessonNameValidate(unitName, text, insideHeading);
 
             lib.BackButton().click();
             ThreadSleep5000();

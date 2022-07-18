@@ -31,7 +31,7 @@ public class AudioCheck extends Base {
         Thread.sleep(3000);
     }
 
-    public void ValidateTest(String curr_time){
+    public void AudioCheckValidateTest(String curr_time){
         System.out.println(curr_time);
         if(curr_time.equals("0:00")){
             Assert.fail();
@@ -86,7 +86,7 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000021l && mob <= 9000000040l){ // English Coursebook - Part A
             lib.EnglishCoursebookGrade2().click();
@@ -105,7 +105,7 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000041l && mob <= 9000000060l){ // English Coursebook - Part A
             lib.EnglishCoursebookGrade3().click();
@@ -124,7 +124,7 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000061l && mob <= 9000000080l){ // English Coursebook - Part A
             lib.EnglishCoursebookGrade4().click();
@@ -143,7 +143,7 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000081l && mob <= 9000000100l){ // English Coursebook - Part A
             lib.EnglishCoursebookGrade5().click();
@@ -162,14 +162,14 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
     }
     @Epic("This story represents the Library module of the onelern_school project.")
     @Description("Examine whether or not the audio can successfully played properly.")
     @Story("LIBFT_06")
     @Test(dataProvider = "Teacherdata")
-    public void teacherVideocheck(String mobNumber, String password) throws IOException, InterruptedException {
+    public void teacherAudiocheck(String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
@@ -197,7 +197,7 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000105l && mob <= 9000000108l) { // English Coursebook - Part A
             lib.EnglishCoursebookGrade2().click();
@@ -216,7 +216,7 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000109l && mob <= 9000000112l) { // English Coursebook - Part A
             lib.EnglishCoursebookGrade3().click();
@@ -235,7 +235,7 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000113l && mob <= 9000000116l) { // English Coursebook - Part A
             lib.EnglishCoursebookGrade4().click();
@@ -254,7 +254,7 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000117l && mob <= 9000000120l) { // English Coursebook - Part A
             lib.EnglishCoursebookGrade5().click();
@@ -273,7 +273,7 @@ public class AudioCheck extends Base {
             ThreadSleep5000();
 
             String curr_time = lib.CurrPlayTime().getText();
-            ValidateTest(curr_time);
+            AudioCheckValidateTest(curr_time);
         }
     }
 
@@ -288,7 +288,7 @@ public class AudioCheck extends Base {
         return loginData;
     }
 
-    @DataProvider(name = "Teacherdata")
+    @DataProvider(name = "teacherAudiocheck")
     public Object[][] getteacherData() throws FileAlreadyExistsException {
 
         Object loginData[][] = {{"9000000101", "123456"}, {"9000000105", "123456"}, {"9000000109", "123456"},
