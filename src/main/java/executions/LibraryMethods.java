@@ -5,50 +5,43 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pageObjects.Library;
 import pageObjects.LoginPage;
+import resources.Base;
+import resources.BaseLogin;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class LibraryMethods {
+public class LibraryMethods extends BaseLogin {
     public Library lib;
     public LoginPage log;
+    public WebDriver driver;
     JavascriptExecutor js;
+
+    public LibraryMethods(WebDriver driver2) {
+        super(driver2);
+    }
+
     public void ThreadSleep5000() throws InterruptedException {
         Thread.sleep(5000);
     }
     public void ThreadSleep3000() throws InterruptedException {
         Thread.sleep(3000);
     }
-    public void studentblock(WebDriver driver, String mobileNo, String pass) throws InterruptedException {
+    public void studentblock(WebDriver driver, String mobileNo, String pass) throws InterruptedException, IOException {
         this.log = new LoginPage(driver);
-        log.getStudentSignIn().click();
-        log.getUserName().sendKeys(mobileNo);
-        log.getSubmitButton().click();
-        Thread.sleep(5000);
-        log.getloginWithPassword().click();
-        log.getPassword().sendKeys(pass);
-        Thread.sleep(5000);
-        log.getPasswordButton().click();
-        Thread.sleep(5000);
-        lib.StudentImageClick().click();
-        ThreadSleep5000();
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("student", mobileNo, pass);
     }
-    public void teacherblock(WebDriver driver, String mobileNo, String pass) throws InterruptedException {
+    public void teacherblock(WebDriver driver, String mobileNo, String pass) throws InterruptedException, IOException {
         this.log = new LoginPage(driver);
-        log.getTeacherSignIn().click();
-        log.getUserName().sendKeys(mobileNo);
-        log.getSubmitButton().click();
-        Thread.sleep(5000);
-        log.getloginWithPassword().click();
-        log.getPassword().sendKeys(pass);
-        Thread.sleep(5000);
-        log.getPasswordButton().click();
-        Thread.sleep(5000);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("teacher", mobileNo, pass);
     }
 
     public boolean studentLanding(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         studentblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         lib.LibraryToggle().click();
         ThreadSleep5000();
         String Headingtext_actual = lib.WorkbookHeading().getText();
@@ -63,6 +56,7 @@ public class LibraryMethods {
     }
     public boolean teacherLanding(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         teacherblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         ThreadSleep5000();
         lib.LibraryToggle().click();
         ThreadSleep5000();
@@ -90,6 +84,7 @@ public class LibraryMethods {
     public boolean CheckStudentBookGrade(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         studentblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         lib.LibraryToggle().click();
         ThreadSleep5000();
         if (mob >= 9000000001l && mob <= 9000000020l) {// English
@@ -133,6 +128,7 @@ public class LibraryMethods {
     public boolean CheckTeacherBookGrade(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         teacherblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         ThreadSleep5000();
         lib.LibraryToggle().click();
         if (mob >= 9000000101l && mob <= 9000000104l) {
@@ -187,6 +183,7 @@ public class LibraryMethods {
     public boolean StudentWorkbookCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         studentblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         lib.LibraryToggle().click();
         ThreadSleep5000();
 
@@ -254,6 +251,7 @@ public class LibraryMethods {
     public boolean TeacherWorkbookCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         teacherblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         lib.LibraryToggle().click();
         ThreadSleep5000();
 
@@ -338,6 +336,7 @@ public class LibraryMethods {
     public boolean StudentLessonNameCheck(WebDriver driver, String mobNumber, String password) throws  IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         studentblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         ThreadSleep5000();
         lib.LibraryToggle().click();
         ThreadSleep5000();
@@ -647,7 +646,7 @@ public class LibraryMethods {
 
         Long mob = Long.parseLong(mobNumber);
         teacherblock(driver, mobNumber, password);
-
+        this.lib = new Library(driver);
         ThreadSleep5000();
         lib.LibraryToggle().click();
         ThreadSleep5000();
@@ -968,7 +967,7 @@ public class LibraryMethods {
     public boolean StudentLessonTopicCheck(WebDriver driver, String mobNumber, String password) throws  IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         studentblock(driver, mobNumber, password);
-
+        this.lib = new Library(driver);
         ThreadSleep5000();
         lib.LibraryToggle().click();
         ThreadSleep5000();
@@ -1251,7 +1250,7 @@ public class LibraryMethods {
     public boolean TeacherLessonTopicCheck(WebDriver driver, String mobNumber, String password) throws  IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         teacherblock(driver, mobNumber, password);
-
+        this.lib = new Library(driver);
         ThreadSleep5000();
         lib.LibraryToggle().click();
         ThreadSleep5000();
@@ -1543,7 +1542,7 @@ public class LibraryMethods {
     public boolean StudentAudioCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         studentblock(driver, mobNumber, password);
-
+        this.lib = new Library(driver);
         Thread.sleep(5000);
         lib.LibraryToggle().click();
         Thread.sleep(5000);
@@ -1649,6 +1648,7 @@ public class LibraryMethods {
     public boolean teacherAudiocheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         teacherblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         ThreadSleep5000();
         lib.LibraryToggle().click();
         ThreadSleep5000();
@@ -1783,7 +1783,7 @@ public class LibraryMethods {
         Long mob = Long.parseLong(mobNumber);
         studentblock(driver, mobNumber, password);
         ThreadSleep3000();
-
+        this.lib = new Library(driver);
         lib.LibraryToggle().click();
         ThreadSleep3000();
 
@@ -2004,6 +2004,7 @@ public class LibraryMethods {
     public boolean teacherVideocheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         teacherblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         ThreadSleep5000();
         lib.LibraryToggle().click();
         ThreadSleep5000();
@@ -2239,7 +2240,7 @@ public class LibraryMethods {
     public boolean StudentSearchCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         studentblock(driver, mobNumber, password);
-
+        this.lib = new Library(driver);
         ThreadSleep3000();
         lib.LibraryToggle().click();
         ThreadSleep3000();
@@ -2267,7 +2268,6 @@ public class LibraryMethods {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
-
         }
         else if (mob >= 9000000021l && mob <= 9000000040l){ // English Coursebook - Part A
             String search_text= "read";
@@ -2292,7 +2292,6 @@ public class LibraryMethods {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
-
         }
         else if (mob >= 9000000041l && mob <= 9000000060l){ // Mathematics Coursebook - Part A
             String search_text= "digit";
@@ -2317,7 +2316,6 @@ public class LibraryMethods {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
-
         }
         else if (mob >= 9000000061l && mob <= 9000000080l){ // English Coursebook - Part A
             String search_text= "read";
@@ -2342,7 +2340,6 @@ public class LibraryMethods {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
-
         }
         else if (mob >= 9000000081l && mob <= 9000000100l){ // English Coursebook - Part A
             String search_text= "learn";
@@ -2375,6 +2372,7 @@ public class LibraryMethods {
     public boolean TeacherSearchCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         Long mob = Long.parseLong(mobNumber);
         teacherblock(driver, mobNumber, password);
+        this.lib = new Library(driver);
         Thread.sleep(5000);
         lib.LibraryToggle().click();
         ThreadSleep5000();
@@ -2402,7 +2400,6 @@ public class LibraryMethods {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
-
         }
         else if (mob >= 9000000105l && mob <= 9000000108l){ // English Coursebook - Part A
             String search_text= "read";
@@ -2427,7 +2424,6 @@ public class LibraryMethods {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
-
         }
         else if (mob >= 9000000109l && mob <= 9000000112l){ // Mathematics Coursebook - Part A
             String search_text= "digit";
@@ -2452,7 +2448,6 @@ public class LibraryMethods {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
-
         }
         else if (mob >= 9000000113l && mob <= 9000000116l){ // English Coursebook - Part A
             String search_text= "read";
@@ -2477,7 +2472,6 @@ public class LibraryMethods {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
-
         }
         else if (mob >= 9000000117l && mob <= 9000000120l){ // English Coursebook - Part A
             String search_text= "learn";
@@ -2502,7 +2496,6 @@ public class LibraryMethods {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
-
         }
         return false;
     }

@@ -13,6 +13,9 @@ public class LoginPage {
     By loginWithPassword = By.xpath("/html/body/div[4]/div/div/div[2]/button[2]");
     By okText = By.id("ok-btn");
     By UserName = By.id("mobile-number");
+
+    By StudentImageClick = By.xpath("//div[@class='d-flex justify-content-center align-items-center flex-column']//div[2]//button[1]//img[1]");
+
     // constructor
     public LoginPage(WebDriver driver2) {
         // TODO Auto-generated constructor stub
@@ -53,5 +56,8 @@ public class LoginPage {
     // Get ok text
     public WebElement okText() {
         return driver.findElement(okText);
+    }
+    public WebElement StudentImageClick() {
+        return driver.findElement(StudentImageClick);
     }
 }

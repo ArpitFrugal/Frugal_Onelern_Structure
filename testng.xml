@@ -13,14 +13,15 @@
 			<class name="Notebook.LessonNameVerify"/>
 
 <!--			Library-->
-			<class name="Library.LibLandingPageCheck" />
-			<class name="Library.GradeCheck" />
-			<class name="Library.WorkbookNameVerify" />
-			<class name="Library.LessonNameVerify"/>
-			<class name="Library.LessonTopicsVerify" />
-			<class name="Library.SearchCheck" />
-			<class name="Library.VideoCheck" />
-			<class name="Library.AudioCheck"/>
+<!--			<class name="Library.LibLandingPageCheck" />-->
+<!--			<class name="Library.GradeCheck" />-->
+<!--			<class name="Library.WorkbookNameVerify" />-->
+<!--			<class name="Library.LessonNameVerify"/>-->
+<!--			<class name="Library.LessonTopicsVerify" />-->
+<!--			<class name="Library.SearchCheck" />-->
+<!--			<class name="Library.VideoCheck" />-->
+<!--			<class name="Library.AudioCheck"/>-->
+			<class name="Library.LibraryFunctionalities"/>
 
 
 			<!--			Login-->
