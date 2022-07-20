@@ -3,6 +3,7 @@ package Library;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 
+import io.qameta.allure.Severity;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;

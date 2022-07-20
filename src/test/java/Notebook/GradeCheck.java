@@ -31,7 +31,7 @@ public class GradeCheck extends Base {
         log = new LoginPage(driver);
     }
 
-    public void ValidateTest(String actual_grade, String expected_grade){
+    public void NotebookGradeCheckValidateTest(String actual_grade, String expected_grade){
         System.out.println(actual_grade +" "+expected_grade);
         if (actual_grade.contains(expected_grade)) {
             System.out.println("PASSED");
@@ -56,14 +56,14 @@ public class GradeCheck extends Base {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 1 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000021l && mob <= 9000000040l) {// English
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 2 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
 
         }
 
@@ -71,21 +71,21 @@ public class GradeCheck extends Base {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 3 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000061l && mob <= 9000000080l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 4 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000081l && mob <= 9000000100l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 5 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
     }
@@ -104,35 +104,35 @@ public class GradeCheck extends Base {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 1 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000105l && mob <= 9000000108l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 2 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000109l && mob <= 9000000112l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 3 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000113l && mob <= 9000000116l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 4 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000117l && mob <= 9000000120l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
             String expected_grade = "GRADE 5 ";
 
-            ValidateTest(actual_grade, expected_grade);
+            NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
     }
