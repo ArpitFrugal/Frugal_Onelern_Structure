@@ -82,7 +82,7 @@ public class Library {
 //	By ThirdTopic = By.xpath("/html/body/div[3]/div/div[2]/div/div/div/div/div[4]/a/div/div");
 //	By SecondTopicEng = By.xpath("/html/body/div[3]/div/div[2]/div/div/div/div/div[3]/a");
 //	By ThirdTopicEng = By.xpath("/html/body/div[3]/div/div[2]/div/div/div/div/div[4]/a");
-	By VideoModalboxCloseBtn = By.id("close_btn");
+	By VideoModalboxCloseBtn = By.id("close_btnFullscreen");
 	By ContentsPageTab = By.id("contents");
 	By FirstTopic = By.id("section_1");
 	By SecondTopic = By.id("section_2");

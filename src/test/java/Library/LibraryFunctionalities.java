@@ -12,9 +12,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pageObjects.Library;
 import resources.Base;
+import testResource.ReadExcelFile;
 
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 
 public class LibraryFunctionalities extends Base {
     public Library lib;
@@ -36,7 +36,7 @@ public class LibraryFunctionalities extends Base {
     @Epic("This story represents the Library module of the onelern_school project.")
     @Description("Examine whether or not the student can successfully get inside the library module.")
     @Story("LIBFS_01")
-    @Test(dataProvider = "Studentdata", priority=1, groups="Library_landing")
+    @Test(dataProvider = "studentdata", priority=1, groups="Library_landing")
     public void studentLanding(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertEquals(libmethods.studentLanding(driver, mobNumber,password),true);
 
@@ -53,7 +53,7 @@ public class LibraryFunctionalities extends Base {
     @Epic("This story represents the Library module of the onelern_school project.")
     @Description("To see if a student in a specific grade has the correct grade book")
     @Story("LIBFS_02")
-    @Test(dataProvider = "Studentdata", priority=3, groups="Grade_Check")
+    @Test(dataProvider = "studentdata", priority=3, groups="Grade_Check")
     public void CheckStudentBookGrade(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertEquals(libmethods.CheckStudentBookGrade(driver, mobNumber, password), true);
     }
@@ -63,7 +63,7 @@ public class LibraryFunctionalities extends Base {
     @Story("LIBFT_02")
     @Test(dataProvider = "teacherdata", priority=4, groups="Grade_Check")
     public void CheckTeacherBookGrade(String mobNumber, String password) throws IOException, InterruptedException {
-    Assert.assertEquals(libmethods.CheckTeacherBookGrade(driver, mobNumber, password), true);
+        Assert.assertEquals(libmethods.CheckTeacherBookGrade(driver, mobNumber, password), true);
     }
 
 
@@ -71,7 +71,7 @@ public class LibraryFunctionalities extends Base {
     @Epic("This story represents the Library module of the onelern_school project.")
     @Description("To check if the student workbook name is the same as that mentioned in the library image")
     @Story("LIBFS_03")
-    @Test(dataProvider = "Studentdata", priority=5, groups="Workbook_Check")
+    @Test(dataProvider = "studentdata", priority=5, groups="Workbook_Check")
     public void StudentWorkbookCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertEquals(libmethods.StudentWorkbookCheck(driver,mobNumber,password), true);
     }
@@ -87,7 +87,7 @@ public class LibraryFunctionalities extends Base {
     @Epic("This story represents the Library module of the onelern_school project.")
     @Description("Whichever option is selected, the lesson name should be clearly visible.")
     @Story("LIBFS_04")
-    @Test(dataProvider = "Studentdata", priority=7, groups="LessonName")
+    @Test(dataProvider = "studentdata", priority=7, groups="LessonName")
     public void StudentLessonNameCheck(String mobNumber, String password) throws  IOException, InterruptedException {
         Assert.assertEquals(libmethods.StudentLessonNameCheck(driver, mobNumber, password), true);
     }
@@ -103,7 +103,7 @@ public class LibraryFunctionalities extends Base {
     @Epic("This story represents the Library module of the onelern_school project.")
     @Description("Whichever option is selected, the lesson name should be clearly visible.")
     @Story("LIBFS_05")
-    @Test(dataProvider = "Studentdata", priority=9, groups="LessonTopic")
+    @Test(dataProvider = "studentdata", priority=9, groups="LessonTopic")
     public void StudentLessonTopicCheck(String mobNumber, String password) throws  IOException, InterruptedException {
         Assert.assertEquals(libmethods.StudentLessonTopicCheck(driver, mobNumber, password),true);
     }
@@ -119,7 +119,7 @@ public class LibraryFunctionalities extends Base {
     @Epic("This story represents the Library module of the onelern_school project.")
     @Description("To check if the audio player is displayed or not.")
     @Story("LIBFS_06")
-    @Test(dataProvider = "Studentdata", priority=11, groups="AudioCheck")
+    @Test(dataProvider = "studentdata", priority=11, groups="AudioCheck")
     public void StudentAudioCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertEquals(libmethods.StudentAudioCheck(driver, mobNumber, password), true);
     }
@@ -137,7 +137,7 @@ public class LibraryFunctionalities extends Base {
     @Epic("This story represents the Library module of the onelern_school project.")
     @Description("Examine whether or not the video can successfully played properly.")
     @Story("LIBFS_07")
-    @Test(dataProvider = "Studentdata", priority=13, groups="VideoCheck")
+    @Test(dataProvider = "studentdata", priority=13, groups="VideoCheck")
     public void studentVideocheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertEquals(libmethods.studentVideocheck(driver, mobNumber, password), true);
     }
@@ -153,7 +153,7 @@ public class LibraryFunctionalities extends Base {
     @Epic("This story represents the Library module of the onelern_school project.")
     @Description("Searched content should be displayed on screen.")
     @Story("LIBFS_8")
-    @Test(dataProvider = "Studentdata", priority=15, groups="SearchCheck")
+    @Test(dataProvider = "studentdata", priority=15, groups="SearchCheck")
     public void StudentSearchCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertEquals(libmethods.StudentSearchCheck(driver, mobNumber, password), true);
     }
@@ -174,20 +174,17 @@ public class LibraryFunctionalities extends Base {
         driver.close();
     }
 
-    @DataProvider(name = "Studentdata")
-    public Object[][] getstudentData() throws FileAlreadyExistsException {
-
-        Object loginData[][] = { { "9000000001", "123456" }, { "9000000024", "123456" }, { "9000000046", "123456" },
-                { "9000000069", "123456" }, { "9000000081", "123456" } };
-//		Object loginData[][] = { { "9000000001", "123456" } };
+    @DataProvider(name = "studentdata")
+    public Object[][] getstudentData() {
+//		Object[][] loginData = { { "9000000001", "123456" } };
+        Object[][] loginData = ReadExcelFile.TestcasesCredentials("student");
 
         return loginData;
     }
     @DataProvider(name = "teacherdata")
-    public Object[][] getteacherData() throws FileAlreadyExistsException {
-        Object loginData[][] = { { "9000000101", "123456" }, { "9000000105", "123456" }, { "9000000110", "123456" },
-                { "9000000114", "123456" }, { "9000000120", "123456" } };
-//		Object loginData[][] = { { "9000000101", "123456" } };
+    public Object[][] getteacherData() {
+//		Object[][] loginData = { { "9000000101", "123456" } };
+        Object[][] loginData = ReadExcelFile.TestcasesCredentials("teacher");
 
         return loginData;
     }

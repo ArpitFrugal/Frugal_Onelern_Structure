@@ -6,23 +6,14 @@
 </listeners>
 	<test thread-count="5" name="Test">
 		<classes>
+			<!--			Publish-->
+			<class name="Publish.PublishFunctionalities"/>
 
 			<!--			Notebook-->
-			<class name="Notebook.NotebookLandingPageCheck"/>
-			<class name="Notebook.GradeCheck"/>
-			<class name="Notebook.LessonNameVerify"/>
+			<class name="Notebook.NotebookFunctionalities"/>
 
-<!--			Library-->
-<!--			<class name="Library.LibLandingPageCheck" />-->
-<!--			<class name="Library.GradeCheck" />-->
-<!--			<class name="Library.WorkbookNameVerify" />-->
-<!--			<class name="Library.LessonNameVerify"/>-->
-<!--			<class name="Library.LessonTopicsVerify" />-->
-<!--			<class name="Library.SearchCheck" />-->
-<!--			<class name="Library.VideoCheck" />-->
-<!--			<class name="Library.AudioCheck"/>-->
+			<!--			Library-->
 			<class name="Library.LibraryFunctionalities"/>
-
 
 			<!--			Login-->
 			<class name="loginFunctionality.LoginLandingPageCheck" />
