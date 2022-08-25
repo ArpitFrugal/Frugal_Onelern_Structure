@@ -1,9 +1,7 @@
 package Publish;
 
 import executions.PublishMethods;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -16,9 +14,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import testResource.Listners;
 import testResource.ReadExcelFile;
-@Listeners(Listners.class)
+
 public class PublishFunctionalities extends Base{
-    private final Logger demoLogger = LogManager.getLogger(PublishFunctionalities.class.getName());
+//    private final Logger demoLogger = LogManager.getLogger(PublishFunctionalities.class.getName());
     public WebDriver driver;
     public Publish pub;
 
@@ -26,7 +24,7 @@ public class PublishFunctionalities extends Base{
 
     @BeforeMethod // Method will work before each method inside this class
     public void standardLogic() throws IOException {
-        demoLogger.info("Standard logic building");
+//        demoLogger.info("Standard logic building");
         driver = initializeDriver();
         driver.manage().window().maximize();
         driver.get(prop.getProperty("url"));
@@ -36,69 +34,77 @@ public class PublishFunctionalities extends Base{
 
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the student can successfully get inside the publish module.")
-    @Story("PUBFS_01")
+    @Story("TPUBFS_01")
+    @Severity(SeverityLevel.BLOCKER)
     @Test(dataProvider = "studentdata", priority = 1)
     public void studentLanding(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.studentLanding(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.studentLanding(driver, mobNumber, password));
     }
 
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the teacher can successfully get inside the Publish module.")
     @Story("PUBFT-01")
+    @Severity(SeverityLevel.BLOCKER)
     @Test(dataProvider = "teacherdata", priority = 2)
     public void teacherLanding(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.teacherLanding(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.teacherLanding(driver, mobNumber, password));
     }
 
 
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the teacher can successfully get inside the Publish module.")
     @Story("PUBFT-02")
+    @Severity(SeverityLevel.CRITICAL)
     @Test(dataProvider = "teacherdata", priority = 3)
     public void teacherPublishNewContentBtnCheck(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.teacherPublishNewContentBtnCheck(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.teacherPublishNewContentBtnCheck(driver, mobNumber, password));
     }
 
 
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the teacher can successfully publish new content.")
     @Story("PUBFT-03")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "teacherdata", priority = 4)
     public void teacherPublishNewContentCheck(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.teacherPublishNewContentCheck(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.teacherPublishNewContentCheck(driver, mobNumber, password));
     }
 
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the student can successfully view the published content published by teacher.")
-    @Story("PUBFS_02")
+    @Story("TPUBFS_02")
+    @Severity(SeverityLevel.CRITICAL)
     @Test(dataProvider = "studentdata", priority = 5)
     public void studentPublishNewContentCheck(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.studentPublishNewContentCheck(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.studentPublishNewContentCheck(driver, mobNumber, password));
     }
 
 
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the student can successfully view and like the published content.")
-    @Story("PUBFS_03")
+    @Story("TPUBFS_03")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "studentdata", priority = 6)
     public void studentPublishViewsandLikes(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.studentPublishViewsandLikes(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.studentPublishViewsandLikes(driver, mobNumber, password));
     }
 
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the student can successfully navigate to next pages.")
-    @Story("PUBFS_04")
+    @Story("TPUBFS_04")
+    @Severity(SeverityLevel.MINOR)
     @Test(dataProvider = "studentdata", priority = 7)
     public void studentPublishPagination(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.studentPublishPagination(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.studentPublishPagination(driver, mobNumber, password));
     }
 
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the teacher can successfully navigate to next pages.")
     @Story("PUBFT-04")
+    @Severity(SeverityLevel.MINOR)
     @Test(dataProvider = "teacherdata", priority = 8)
     public void teacherPublishPagination(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.teacherPublishPagination(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.teacherPublishPagination(driver, mobNumber, password));
     }
 
 
@@ -106,10 +112,11 @@ public class PublishFunctionalities extends Base{
 
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the student can successfully filter content according to Teacher.")
-    @Story("PUBFS_05")
+    @Story("TPUBFS_05")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "studentdata", priority = 9)
     public void studentTeacherCategoryFilters(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.studentPublishTeacherFilter(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.studentPublishTeacherFilter(driver, mobNumber, password));
     }
 
     // PublishSubjectLessonCategoryFilters_Teacher
@@ -117,9 +124,10 @@ public class PublishFunctionalities extends Base{
     @Epic("This story represents the Publish module of the onelern_school project.")
     @Description("Examine whether or not the teacher can successfully filter the content according to book.")
     @Story("PUBFT-05")
+    @Severity(SeverityLevel.NORMAL)
     @Test(dataProvider = "teacherdata", priority = 10)
     public void teacherSubjectLessonCategoryFilters(String mobNumber, String password) throws IOException, InterruptedException {
-        Assert.assertEquals(pubmethods.teacherSubjectLessonCategoryFilters(driver, mobNumber, password), true);
+        Assert.assertTrue(pubmethods.teacherSubjectLessonCategoryFilters(driver, mobNumber, password));
     }
 
 
@@ -129,7 +137,7 @@ public class PublishFunctionalities extends Base{
 
     @AfterMethod // Method will work After each method inside this class
     public void tearDown() {
-        driver.close();
+        driver.quit();
     }
 
     @DataProvider(name = "studentdata")

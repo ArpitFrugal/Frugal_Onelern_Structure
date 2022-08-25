@@ -1,5 +1,6 @@
 package pageObjects;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -65,8 +66,7 @@ public class Notebook {
     //    By bookmarkBtn = By.className("radio-item bookmark");
     By deleteBtn = By.xpath("//div[contains(@class,'radio-item deleteannotation')]");
     By random_text_to_click = By.xpath("//p[contains(@class,'svelte')]");
-
-    //    By SearchIcon = By.xpath("//img[@class='pointer']");
+    By TeacherSearchIcon = By.xpath("//img[@class='pointer']");
     By SearchIcon = By.id("search_icon");
     By SearchInput = By.id("search_box");
     By contents = By.xpath("//*[contains(@class,'bookmark student-state ')]");
@@ -77,6 +77,7 @@ public class Notebook {
     }
 
     // highlights
+    @Step("Library module is opened...")
     public WebElement LibraryToggle() { return driver.findElement(LibraryToggle); }
     public WebElement FirstTopic(){return driver.findElement(FirstTopic);}
     public WebElement SecondTopic(){return driver.findElement(SecondTopic);}
@@ -88,24 +89,27 @@ public class Notebook {
     public WebElement EngFirstLessonFirstTopicRefGrade4(){return driver.findElement(EngFirstLessonFirstTopicRefGrade4);}
     public WebElement MathFirstLessonFirstTopicRefGrade5(){return driver.findElement(MathFirstLessonFirstTopicRefGrade5);}
 
-
+    @Step("Text is highlighted in green color...")
     public WebElement greenBtn(){return driver.findElement(greenBtn);}
     public WebElement notesBtn(){return driver.findElement(notesBtn);}
     public WebElement notesTextarea(){return driver.findElement(notesTextarea);}
     public WebElement saveNoteBtn(){return driver.findElement(saveNoteBtn);}
     public WebElement bookmarkBtn(){return driver.findElement(bookmarkBtn);}
+    @Step("removed highlight for highlighted text...")
     public WebElement deleteBtn(){return driver.findElement(deleteBtn);}
     public WebElement random_text_to_click(){return driver.findElement(random_text_to_click);}
 
 
+    public WebElement TeacherSearchIcon(){return driver.findElement(TeacherSearchIcon);}
     public WebElement SearchIcon(){return driver.findElement(SearchIcon);}
+    @Step("Searching text...")
     public WebElement SearchInput(){return driver.findElement(SearchInput);}
     public List<WebElement> contents(){return driver.findElements(contents);}
 
 
 
 
-
+    @Step("Student account is selected...")
     public WebElement StudentImageClick() {
         return driver.findElement(StudentImageClick);
     }
@@ -113,14 +117,13 @@ public class Notebook {
 //        return driver.findElement(TeacherNotebookToggle);
 //    }
     public WebElement StudentNotebookToggle() {return driver.findElement(StudentNotebookToggle);}
-    public WebElement NotebookToggle() {
-        return driver.findElement(NotebookToggle);
-    }
-    public WebElement BackButton() {
-        return driver.findElement(BackButton);
-    }
+    @Step("Notebook Module is opened...")
+    public WebElement NotebookToggle() { return driver.findElement(NotebookToggle);}
+    @Step("Back button is clicked...")
+    public WebElement BackButton() { return driver.findElement(BackButton);}
 
     // landing page
+    @Step("Fetching heading...")
     public String GetHeader(){return driver.findElement(GetHeader).getText();}
 
 
@@ -151,6 +154,7 @@ public class Notebook {
     public String FirstLessonText(){return driver.findElement(FirstLessonText).getText();}
     public String SecondLessonText(){return driver.findElement(SecondLessonText).getText();}
     public String ThirdLessonText(){return driver.findElement(ThirdLessonText).getText();}
+    @Step("Fetching lesson heading...")
     public String LessonHeading(){return driver.findElement(LessonHeading).getText().substring(2);}
 
 }

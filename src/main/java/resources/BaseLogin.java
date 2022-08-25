@@ -4,12 +4,13 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.LoginPage;
 
 import java.io.IOException;
+import java.util.Properties;
 
 public class BaseLogin extends Base {
 
 	public LoginPage log;
 	public WebDriver driver;
-
+	public Properties prop;
 	public BaseLogin(WebDriver driver2) {
 		// TODO Auto-generated constructor stub
 		this.driver = driver2;

@@ -2,6 +2,8 @@ package loginFunctionality;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
+
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -10,9 +12,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import executions.LoginMethods;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Story;
 import pageObjects.LoginPage;
 import resources.Base;
 import testResource.ReadExcelFile;
@@ -36,56 +35,68 @@ public class UserSignInFunctionality extends Base {
 	}
 
 	@Epic("Login functionality of the onelern_school project.")
-	@Description("Examin Student Login with correct details")
+	@Description("Examine Student Login with correct details")
 	@Story("LOGFS_02")
+	@Severity(SeverityLevel.BLOCKER)
 	@Test(dataProvider = "StudentLoginPageCorrectCredentials_Data", priority = 1)
+	@Step("Logging in as student- mobile number: {0} and password: {1} for Login Check.")
 	public void StudentLoginPageCorrectCredentials(String mobileNo, String pass) throws InterruptedException {
-		Assert.assertEquals(logmethods.StudentLoginPageCorrectCredentials(driver, mobileNo, pass), true);
+		Assert.assertTrue(logmethods.StudentLoginPageCorrectCredentials(driver, mobileNo, pass));
 	}
 
 	@Epic("Login functionality of the onelern_school project.")
-	@Description("Examin Student Login with incorrect password details")
+	@Description("Examine Student Login with incorrect password details")
 	@Story("LOGFS_03")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(dataProvider = "StudentLoginPageIncorrectPassword_Data", priority = 2)
+	@Step("Logging in as student- mobile number: {0} and password: {1} for Login Check.")
 	public void StudentLoginPageIncorrectPassword(String mobileNo, String pass) throws InterruptedException {
-		Assert.assertEquals(logmethods.StudentLoginPageIncorrectPassword(driver, mobileNo, pass), true);
+		Assert.assertTrue(logmethods.StudentLoginPageIncorrectPassword(driver, mobileNo, pass));
 	}
 
 	@Epic("Login functionality of the onelern_school project.")
-	@Description("Examin Student Login with incorrect mobile number")
+	@Description("Examine Student Login with incorrect mobile number")
 	@Story("LOGFS_04")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(dataProvider = "IncorrectuserMobileNoCheck_Data", priority = 3)
+	@Step("Logging in as student- mobile number: {0} and password: {1} for Login Check.")
 	public void IncorrectStudentMobileNoCheck(String mobileNo, String pass) throws InterruptedException {
-		Assert.assertEquals(logmethods.IncorrectStudentMobileNoCheck(driver, mobileNo, pass), true);
+		Assert.assertTrue(logmethods.IncorrectStudentMobileNoCheck(driver, mobileNo, pass));
 	}
 
 	@Epic("Login functionality of the onelern_school project.")
-	@Description("Examin Teachers Login with correct details")
+	@Description("Examine Teachers Login with correct details")
 	@Story("LOGFT_02")
+	@Severity(SeverityLevel.BLOCKER)
 	@Test(dataProvider = "TeacherLoginPageCorrectCredentials_Data", priority = 4)
+	@Step("Logging in as teacher- mobile number: {0} and password: {1} for Login Check.")
 	public void TeacherLoginPageCorrectCredentials(String mobileNo, String pass) throws InterruptedException {
-		Assert.assertEquals(logmethods.TeacherLoginPageCorrectCredentials(driver, mobileNo, pass), true);
+		Assert.assertTrue(logmethods.TeacherLoginPageCorrectCredentials(driver, mobileNo, pass));
 	}
 
 	@Epic("Login functionality of the onelern_school project.")
-	@Description("Examin Teacher Login with incorrect password details")
+	@Description("Examine Teacher Login with incorrect password details")
 	@Story("LOGFT_03")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(dataProvider = "TeacherLoginPageIncorrectPassword_Data", priority = 5)
+	@Step("Logging in as teacher- mobile number: {0} and password: {1} for Login Check.")
 	public void TeacherLoginPageIncorrectPassword(String mobileNo, String pass) throws InterruptedException {
-		Assert.assertEquals(logmethods.TeacherLoginPageIncorrectPassword(driver, mobileNo, pass), true);
+		Assert.assertTrue(logmethods.TeacherLoginPageIncorrectPassword(driver, mobileNo, pass));
 	}
 
 	@Epic("Login functionality of the onelern_school project.")
-	@Description("Examin Teacher Login with incorrect mobile number")
+	@Description("Examine Teacher Login with incorrect mobile number")
 	@Story("LOGFT_04")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(dataProvider = "IncorrectuserMobileNoCheck_Data", priority = 6)
+	@Step("Logging in as teacher- mobile number: {0} and password:{1} for Login Check.")
 	public void IncorrectTeacherMobileNoCheck(String mobileNo, String pass) throws InterruptedException {
-		Assert.assertEquals(logmethods.IncorrectTeacherMobileNoCheck(driver, mobileNo, pass), true);
+		Assert.assertTrue(logmethods.IncorrectTeacherMobileNoCheck(driver, mobileNo, pass));
 	}
 
 	@AfterMethod // Method will work After each method inside this class
 	public void tearDown() {
-		driver.close();
+		driver.quit();
 	}
 
 	@DataProvider(name = "StudentLoginPageCorrectCredentials_Data")
@@ -93,6 +104,7 @@ public class UserSignInFunctionality extends Base {
 
 //		Object[][] loginData = { { "9000000010", "123456" }, { "9000000024", "123456" }, { "9000000056", "123456" },
 //				{ "9000000085", "123456" }, { "9000000091", "123456" } };
+//		Object[][] loginData = { { "9000000001", "123456" } };
 		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("SLPC");
 		return loginData;
 	}

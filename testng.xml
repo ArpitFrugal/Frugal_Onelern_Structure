@@ -6,6 +6,9 @@
 </listeners>
 	<test thread-count="5" name="Test">
 		<classes>
+			<!--			Doubts-->
+			<class name="Doubts.DoubtsFunctionalities"/>
+
 			<!--			Publish-->
 			<class name="Publish.PublishFunctionalities"/>
 

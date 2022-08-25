@@ -13,35 +13,34 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ReadExcelFile {
 
-	public static void main(String[] args){
-		Object[][] x;
-		x=LoginTestCasesCredentials("SLPC");
-		for(Object[] i:x){
-			System.out.println(i[0]+" "+i[1]);
-		}
-		System.out.println("--------------------------------------------------");
-		x=LoginTestCasesCredentials("SLPIP");
-		for(Object[] i:x){
-			System.out.println(i[0]+" "+i[1]);
-		}
-		System.out.println("--------------------------------------------------");
-		x=LoginTestCasesCredentials("IUMNC");
-		for(Object[] i:x){
-			System.out.println(i[0]+" "+i[1]);
-		}
-		System.out.println("--------------------------------------------------");
-		x=LoginTestCasesCredentials("TLPCC");
-		for(Object[] i:x){
-			System.out.println(i[0]+" "+i[1]);
-		}
-		System.out.println("--------------------------------------------------");
-		x=LoginTestCasesCredentials("TLPIP");
-		for(Object[] i:x){
-			System.out.println(i[0]+" "+i[1]);
-		}
-		System.out.println("--------------------------------------------------");
-
-	}
+//	public static void main(String[] args){
+//		Object[][] x;
+//		x=LoginTestCasesCredentials("SLPC");
+//		for(Object[] i:x){
+//			System.out.println(i[0]+" "+i[1]);
+//		}
+//		System.out.println("--------------------------------------------------");
+//		x=LoginTestCasesCredentials("SLPIP");
+//		for(Object[] i:x){
+//			System.out.println(i[0]+" "+i[1]);
+//		}
+//		System.out.println("--------------------------------------------------");
+//		x=LoginTestCasesCredentials("IUMNC");
+//		for(Object[] i:x){
+//			System.out.println(i[0]+" "+i[1]);
+//		}
+//		System.out.println("--------------------------------------------------");
+//		x=LoginTestCasesCredentials("TLPCC");
+//		for(Object[] i:x){
+//			System.out.println(i[0]+" "+i[1]);
+//		}
+//		System.out.println("--------------------------------------------------");
+//		x=LoginTestCasesCredentials("TLPIP");
+//		for(Object[] i:x){
+//			System.out.println(i[0]+" "+i[1]);
+//		}
+//		System.out.println("--------------------------------------------------");
+//	}
 	public static XSSFWorkbook workbook;
 	public static XSSFSheet sheet;
 	public static Object[][] LoginTestCasesCredentials(String testcase){
@@ -49,7 +48,7 @@ public class ReadExcelFile {
 		int NoOfStudentTestcases = 0, index=0;
 		DataFormatter formatter = new DataFormatter();
 		try {
-			File src = new File("D:\\2(WORK)\\Onelern\\Automation\\Frugal_Onelern_Structure\\Frugal_Onelern_Structure\\data\\UserSignInFunctionality.xlsx");
+			File src = new File(System.getProperty("user.dir")+"/data/UserSignInFunctionality.xlsx");
 			FileInputStream fis = new FileInputStream(src);
 			workbook = new XSSFWorkbook(fis);
 
@@ -101,7 +100,7 @@ public class ReadExcelFile {
 		int NoOfStudentTestcases;
 		DataFormatter formatter = new DataFormatter();
 		try {
-			File src = new File("D:\\2(WORK)\\Onelern\\Automation\\Frugal_Onelern_Structure\\Frugal_Onelern_Structure\\data\\UserSignInFunctionality.xlsx");
+			File src = new File(System.getProperty("user.dir")+"/data/UserSignInFunctionality.xlsx");
 			FileInputStream fis = new FileInputStream(src);
 			workbook = new XSSFWorkbook(fis);
 

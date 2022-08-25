@@ -1,4 +1,5 @@
 package pageObjects;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,10 +23,12 @@ public class LoginPage {
         this.driver = driver2;
     }
     // Get Student login page access
+    @Step("Selected log in as Student...")
     public WebElement getStudentSignIn() {
         return driver.findElement(studentSignIn);
     }
     // Get Teacher login page access
+    @Step("Selected log in as Teacher...")
     public WebElement getTeacherSignIn() {
         return driver.findElement(teacherSignIn);
     }
@@ -34,18 +37,22 @@ public class LoginPage {
         return driver.findElement(othersSignIn);
     }
     // Get username block access
+    @Step("Mobile number is entered...")
     public WebElement getUserName() {
         return driver.findElement(UserName);
     }
     // Get password block access
+    @Step("password is entered...")
     public WebElement getPassword() {
         return driver.findElement(password);
     }
     // Get Submit button
+    @Step("Mobile number is submitted...")
     public WebElement getSubmitButton() {
         return driver.findElement(submitButton);
     }
     //Get Password Submit Button
+    @Step("Password is submitted...")
     public WebElement getPasswordButton() {
         return driver.findElement(PasswordSubmit);
     }
@@ -57,6 +64,7 @@ public class LoginPage {
     public WebElement okText() {
         return driver.findElement(okText);
     }
+    @Step("Student account is selected...")
     public WebElement StudentImageClick() {
         return driver.findElement(StudentImageClick);
     }

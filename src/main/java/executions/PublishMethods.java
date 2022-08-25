@@ -1,11 +1,14 @@
 package executions;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.LoginPage;
 import pageObjects.Publish;
 import resources.BaseLogin;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,9 +54,10 @@ public class PublishMethods extends BaseLogin {
 
     public boolean studentLanding(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.pub = new Publish(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
         pub.PublishToggle().click();
         Thread.sleep(2000);
 
@@ -64,9 +68,10 @@ public class PublishMethods extends BaseLogin {
 
     public boolean teacherLanding(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.pub = new Publish(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
         pub.PublishToggle().click();
         Thread.sleep(2000);
 
@@ -89,11 +94,12 @@ public class PublishMethods extends BaseLogin {
 
     public boolean teacherPublishNewContentBtnCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.pub = new Publish(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
         pub.PublishToggle().click();
-        Thread.sleep(5000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishNewContentBtn()));
 
         pub.PublishNewContentBtn().click();
         Thread.sleep(2000);
@@ -117,12 +123,13 @@ public class PublishMethods extends BaseLogin {
 
     public boolean studentPublishNewContentCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.pub = new Publish(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Long mob = Long.parseLong(mobNumber);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
         pub.PublishToggle().click();
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishContentOnTop()));
 
         String FirstContent = pub.PublishContentOnTop().getText();
         if (mob >= 9000000001l && mob <= 9000000020l) {
@@ -155,12 +162,13 @@ public class PublishMethods extends BaseLogin {
 
     public boolean teacherPublishNewContentCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.pub = new Publish(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Long mob = Long.parseLong(mobNumber);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
         pub.PublishToggle().click();
-        Thread.sleep(5000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishNewContentBtn()));
 
         pub.PublishNewContentBtn().click();
         Thread.sleep(5000);
@@ -186,7 +194,7 @@ public class PublishMethods extends BaseLogin {
 
             pub.PublishContentDescriptionTextArea().click();
             pub.PublishContentDescriptionTextArea().sendKeys(publishContent);
-            Thread.sleep(3000);
+            wait.until(ExpectedConditions.elementToBeClickable(pub.NextStepBtn()));
             pub.NextStepBtn().click();
             Thread.sleep(3000);
             List<WebElement> GradeSectionInput = pub.PublishGradeSectionInput();
@@ -195,11 +203,12 @@ public class PublishMethods extends BaseLogin {
                 webElement.sendKeys(Keys.ARROW_DOWN);
                 webElement.sendKeys(Keys.ENTER);
             }
-            Thread.sleep(3000);
+            wait.until(ExpectedConditions.elementToBeClickable(pub.FinalPublishBtn()));
             pub.FinalPublishBtn().click();
-            Thread.sleep(5000);
+            wait.until(ExpectedConditions.elementToBeClickable(pub.BackAfterPublish()));
+            Thread.sleep(3000);
             pub.BackAfterPublish().click();
-
+            Thread.sleep(3000);
             String actual_time = pub.FirstContentTime().getText();
             String expected_time = "a minute ago a few seconds ago";
             return NewContentValidateTest(actual_time, expected_time);
@@ -210,7 +219,7 @@ public class PublishMethods extends BaseLogin {
 
             pub.PublishContentDescriptionTextArea().click();
             pub.PublishContentDescriptionTextArea().sendKeys(publishContent);
-            Thread.sleep(3000);
+            wait.until(ExpectedConditions.elementToBeClickable(pub.NextStepBtn()));
             pub.NextStepBtn().click();
             Thread.sleep(3000);
             List<WebElement> GradeSectionInput = pub.PublishGradeSectionInput();
@@ -219,9 +228,9 @@ public class PublishMethods extends BaseLogin {
                 webElement.sendKeys(Keys.ARROW_DOWN);
                 webElement.sendKeys(Keys.ENTER);
             }
-            Thread.sleep(3000);
+            wait.until(ExpectedConditions.elementToBeClickable(pub.FinalPublishBtn()));
             pub.FinalPublishBtn().click();
-            Thread.sleep(5000);
+            wait.until(ExpectedConditions.elementToBeClickable(pub.BackAfterPublish()));
             pub.BackAfterPublish().click();
 
             String actual_time = pub.FirstContentTime().getText();
@@ -321,19 +330,21 @@ public class PublishMethods extends BaseLogin {
     public boolean studentPublishViewsandLikes(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         boolean flag1, flag2;
         this.pub = new Publish(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Long mob = Long.parseLong(mobNumber);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
         pub.PublishToggle().click();
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.OutsideViewCount()));
 
         String PrevViewCount = pub.OutsideViewCount().getText();
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.ContentMetaData()));
         pub.ContentMetaData().click();
+        wait.until(ExpectedConditions.elementToBeClickable(pub.InsideViewCount()));
         Thread.sleep(2000);
         String CurrViewCount = pub.InsideViewCount().getText();
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(pub.LikeCount()));
         String PrevLikeCount = pub.LikeCount().getText();
         Thread.sleep(2000);
         flag1 = ViewsandLikesValidateTest(Integer.parseInt(CurrViewCount), Integer.parseInt(PrevViewCount) +1);
@@ -556,12 +567,7 @@ public class PublishMethods extends BaseLogin {
     // PublishSubjectLessonCategoryFilters_Teacher
 
     public boolean Validate(String element, String selectedSubject) {
-        if (element.contains(selectedSubject)){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return element.contains(selectedSubject);
     }
     public boolean teacherSubjectLessonCategoryFilters(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         boolean flag1= true, flag2 = true, flag3 = true;

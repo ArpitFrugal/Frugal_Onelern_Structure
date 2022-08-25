@@ -1,35 +1,37 @@
 package executions;
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.LoginPage;
 public class LoginMethods {
+
     public LoginPage log;
     public void studentblock(WebDriver driver, String mobileNo, String pass) throws InterruptedException {
         this.log = new LoginPage(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         log.getStudentSignIn().click();
         log.getUserName().sendKeys(mobileNo);
         log.getSubmitButton().click();
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(log.getloginWithPassword()));
         log.getloginWithPassword().click();
         log.getPassword().sendKeys(pass);
-        Thread.sleep(5000);
+        wait.until(ExpectedConditions.elementToBeClickable(log.getPasswordButton()));
         log.getPasswordButton().click();
-//      log.getSubmitButton().click();
-        Thread.sleep(5000);
     }
     public void teacherblock(WebDriver driver, String mobileNo, String pass) throws InterruptedException {
         this.log = new LoginPage(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         log.getTeacherSignIn().click();
         log.getUserName().sendKeys(mobileNo);
         log.getSubmitButton().click();
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(log.getloginWithPassword()));
         log.getloginWithPassword().click();
         log.getPassword().sendKeys(pass);
-        Thread.sleep(5000);
+        wait.until(ExpectedConditions.elementToBeClickable(log.getPasswordButton()));
         log.getPasswordButton().click();
-//      log.getSubmitButton().click();
-        Thread.sleep(5000);
     }
     public boolean AlertHandling(WebDriver driver) {
         // Alert Handling
@@ -50,8 +52,6 @@ public class LoginMethods {
                 System.out.println("Popup handled");
                 flag = true;
             }
-        } else {
-            flag = false;
         }
         return flag;
     }
@@ -71,8 +71,7 @@ public class LoginMethods {
             return false;
         }
     }
-    public boolean StudentLoginPageIncorrectPassword(WebDriver driver, String mobileNo, String pass)
-            throws InterruptedException {
+    public boolean StudentLoginPageIncorrectPassword(WebDriver driver, String mobileNo, String pass) throws InterruptedException {
         this.log = new LoginPage(driver);
         log.getStudentSignIn().click();
         log.getUserName().sendKeys(mobileNo);
@@ -80,29 +79,30 @@ public class LoginMethods {
         log.getloginWithPassword().click();
         log.getPassword().sendKeys(pass);
         Thread.sleep(5000);
-        if (log.getPasswordButton().isEnabled() == false) {
+        if (!log.getPasswordButton().isEnabled()) {
             System.out.println("Submit button is not enabled");
             return true;
-        } else {
+        }
+        else {
             boolean flag = false;
             log.getPasswordButton().click();
             Thread.sleep(1500);
             if (driver.getPageSource().contains("Incorrect password. Please try again")) {
                 System.out.println("Invalid message displayed");
                 flag = true;
-            } else {
+            }
+            else {
                 System.out.println("Invalid message not displayed");
                 flag = false;
             }
             return flag;
         }
     }
-    public boolean IncorrectStudentMobileNoCheck(WebDriver driver, String mobileNo, String pass)
-            throws InterruptedException {
+    public boolean IncorrectStudentMobileNoCheck(WebDriver driver, String mobileNo, String pass) throws InterruptedException {
         this.log = new LoginPage(driver);
         log.getStudentSignIn().click();
         log.getUserName().sendKeys(mobileNo);
-        if (log.getSubmitButton().isEnabled() == false) {
+        if (!log.getSubmitButton().isEnabled()) {
             System.out.println("Submit button is not enabled");
             return true;
         } else {
@@ -116,19 +116,18 @@ public class LoginMethods {
         log.getTeacherSignIn().click();
         return driver.getPageSource().contains("Welcome to OneLern");
     }
-    public boolean TeacherLoginPageCorrectCredentials(WebDriver driver, String mobileNo, String pass)
-            throws InterruptedException {
+    public boolean TeacherLoginPageCorrectCredentials(WebDriver driver, String mobileNo, String pass) throws InterruptedException {
         teacherblock(driver, mobileNo, pass);
         if (driver.getPageSource().contains("Quick Menu")) {
             System.out.println("Login Successfull for teacher");
             return true;
-        } else {
+        }
+        else {
             System.out.println("Login Unsuccessful for teacher");
             return false;
         }
     }
-    public boolean TeacherLoginPageIncorrectPassword(WebDriver driver, String mobileNo, String pass)
-            throws InterruptedException {
+    public boolean TeacherLoginPageIncorrectPassword(WebDriver driver, String mobileNo, String pass) throws InterruptedException {
         this.log = new LoginPage(driver);
         log.getTeacherSignIn().click();
         log.getUserName().sendKeys(mobileNo);
@@ -136,7 +135,7 @@ public class LoginMethods {
         log.getloginWithPassword().click();
         log.getPassword().sendKeys(pass);
         Thread.sleep(5000);
-        if (log.getPasswordButton().isEnabled() == false) {
+        if (!log.getPasswordButton().isEnabled()) {
             System.out.println("Submit button is not enabled");
             return true;
         } else {
@@ -153,12 +152,11 @@ public class LoginMethods {
             return flag;
         }
     }
-    public boolean IncorrectTeacherMobileNoCheck(WebDriver driver, String mobileNo, String pass)
-            throws InterruptedException {
+    public boolean IncorrectTeacherMobileNoCheck(WebDriver driver, String mobileNo, String pass) throws InterruptedException {
         this.log = new LoginPage(driver);
         log.getTeacherSignIn().click();
         log.getUserName().sendKeys(mobileNo);
-        if (log.getSubmitButton().isEnabled() == false) {
+        if (!log.getSubmitButton().isEnabled()) {
             System.out.println("Submit button is not enabled");
             return true;
         } else {

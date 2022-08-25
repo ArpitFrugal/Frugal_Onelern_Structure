@@ -1,6 +1,8 @@
 package loginFunctionality;
 
 import java.io.IOException;
+
+import io.qameta.allure.*;
 import resources.Base;
 
 import org.openqa.selenium.WebDriver;
@@ -10,9 +12,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import executions.LoginMethods;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Story;
 import pageObjects.LoginPage;
 
 public class LoginLandingPageCheck extends Base {
@@ -31,24 +30,26 @@ public class LoginLandingPageCheck extends Base {
 	}
 
 	@Epic("Login functionality of the onelern_school project.")
-	@Description("Examin Student Toggel check ")
-	@Story("LOGFS_01")
-	@Test(priority = 1)
-	public void studentLandingPage() {
-		Assert.assertEquals(logmethods.studentLandingPage(driver), true);
-	}
-
-	@Epic("Login functionality of the onelern_school project.")
 	@Description("Examin Teacher toggle check")
 	@Story("LOGFT_01")
 	@Test(priority = 2)
-	public void teacherLandingPage() throws IOException, InterruptedException {
-		Assert.assertEquals(logmethods.teacherLandingPage(driver), true);
+	@Severity(SeverityLevel.BLOCKER)
+	public void teacherLandingPage() {
+		Assert.assertTrue(logmethods.teacherLandingPage(driver));
+	}
+
+	@Epic("Login functionality of the onelern_school project.")
+	@Description("Examin Student Toggel check ")
+	@Story("LOGFS_01")
+	@Test(priority = 1)
+	@Severity(SeverityLevel.BLOCKER)
+	public void studentLandingPage() {
+		Assert.assertTrue(logmethods.studentLandingPage(driver));
 	}
 
 	@AfterMethod // Method will work After each method inside this class
 	public void tearDown() {
-		driver.close();
+		driver.quit();
 	}
 
 }
