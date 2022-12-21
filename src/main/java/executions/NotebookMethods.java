@@ -90,23 +90,23 @@ public class NotebookMethods extends BaseLogin {
     }
 
     public boolean CheckStudentBookGrade(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        Long mob = Long.parseLong(mobNumber);
-        studentblock(driver,mobNumber,password);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         this.note = new Notebook(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(note.NotebookToggle()));
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("student", mobNumber, password);
+        Thread.sleep(2000);
         note.NotebookToggle().click();
         Thread.sleep(2000);
         if (mob >= 9000000001l && mob <= 9000000020l) {// English
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 1 ";
+            String expected_grade = "GRADE 1";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000021l && mob <= 9000000040l) {// English
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 2 ";
+            String expected_grade = "GRADE 2";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
 
@@ -114,65 +114,66 @@ public class NotebookMethods extends BaseLogin {
 
         else if (mob >= 9000000041l && mob <= 9000000060l) {// English
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 3 ";
+            String expected_grade = "GRADE 3";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000061l && mob <= 9000000080l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 4 ";
+            String expected_grade = "GRADE 4";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000081l && mob <= 9000000100l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 5 ";
+            String expected_grade = "GRADE 5";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
+
         return false;
     }
 
     public boolean CheckTeacherBookGrade(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        teacherblock(driver,mobNumber,password);
         this.note = new Notebook(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(note.NotebookToggle()));
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("teacher", mobNumber, password);
+        Thread.sleep(2000);
         note.NotebookToggle().click();
         if (mob >= 9000000101l && mob <= 9000000104l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 1 ";
+            String expected_grade = "GRADE 1";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000105l && mob <= 9000000108l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 2 ";
+            String expected_grade = "GRADE 2";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000109l && mob <= 9000000112l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 3 ";
+            String expected_grade = "GRADE 3";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000113l && mob <= 9000000116l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 4 ";
+            String expected_grade = "GRADE 4";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
 
         else if (mob >= 9000000117l && mob <= 9000000120l) {
             String actual_grade = note.CoursebooksGradeTextGrade().getText();
-            String expected_grade = "GRADE 5 ";
+            String expected_grade = "GRADE 5";
 
             return NotebookGradeCheckValidateTest(actual_grade, expected_grade);
         }
@@ -192,21 +193,23 @@ public class NotebookMethods extends BaseLogin {
     }
 
     public boolean StudentLessonNameCheck(WebDriver driver, String mobNumber, String password) throws  IOException, InterruptedException {
+        this.note = new Notebook(driver);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Long mob = Long.parseLong(mobNumber);
-        studentblock(driver, mobNumber, password);
-        this.note = new Notebook(driver);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("student", mobNumber, password);
 
         note.NotebookToggle().click();
-
+        Thread.sleep(5000);
+        boolean flag1, flag2, flag3;
         // Scrolling Page
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String LessonName, LessonHeading;
         if (mob >= 9000000001l && mob <= 9000000020l) { // Environmental Studies Coursebook - Part A
-            boolean flag1, flag2, flag3;
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnvironmentalCoursebookGrade1()));
-            note.EnvironmentalCoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            WebElement element = note.EnvironmentalCoursebookGrade1();
+            js.executeScript("arguments[0].scrollIntoView();", element);
+            Thread.sleep(5000);
+            element.click();
 
 //          lesson-1
             note.FirstLesson().click();
@@ -215,7 +218,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -224,7 +227,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -239,14 +242,13 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000021l && mob <= 9000000040l) { // Mathematics Coursebook - Part A
-            boolean flag1, flag2, flag3;
             WebElement element = note.MathematicsCoursebookGrade2();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            Thread.sleep(5000);
             element.click();
 
             note.FirstLesson().click(); //2-Digit Numbers click()
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            Thread.sleep(5000);
 
 //          lesson-1
             note.FirstLesson().click();
@@ -255,7 +257,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -264,7 +266,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -274,14 +276,14 @@ public class NotebookMethods extends BaseLogin {
 
             flag3= LessonNameValidateTest(LessonName, LessonHeading);
             Thread.sleep(5000);
+
             return flag1 && flag2 && flag3;
         }
 
         else if (mob >= 9000000041l && mob <= 9000000060l) { // Social Workbook - Part A
-            boolean flag1, flag2, flag3;
             WebElement element = note.SocialStudiesCoursebookGrade3();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            Thread.sleep(3000);
             element.click();
 
 //          lesson-1
@@ -291,7 +293,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -300,7 +302,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -310,16 +312,17 @@ public class NotebookMethods extends BaseLogin {
 
             flag3= LessonNameValidateTest(LessonName, LessonHeading);
             Thread.sleep(5000);
+
             return flag1 && flag2 && flag3;
+
         }
 
         else if (mob >= 9000000061l && mob <= 9000000080l) { // Science Coursebook - Part A
-            boolean flag1, flag2, flag3;
             WebElement element = note.ScienceCoursebookGrade4();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            Thread.sleep(5000);
             element.click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            Thread.sleep(5000);
 //          lesson-1
             note.FirstLesson().click();
             Thread.sleep(5000);
@@ -327,7 +330,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -336,7 +339,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -346,16 +349,17 @@ public class NotebookMethods extends BaseLogin {
 
             flag3= LessonNameValidateTest(LessonName, LessonHeading);
             Thread.sleep(5000);
+
             return flag1 && flag2 && flag3;
+
         }
 
         else if (mob >= 9000000081l && mob <= 9000000100l) { // Social Studies Coursebook - Part A
-            boolean flag1, flag2, flag3;
             WebElement element = note.SocialStudiesCoursebookGrade5();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            Thread.sleep(5000);
             element.click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            Thread.sleep(5000);
 
 //          lesson-1
             note.FirstLesson().click();
@@ -364,7 +368,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -373,7 +377,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -383,6 +387,7 @@ public class NotebookMethods extends BaseLogin {
 
             flag3= LessonNameValidateTest(LessonName, LessonHeading);
             Thread.sleep(5000);
+
             return flag1 && flag2 && flag3;
         }
         return false;
@@ -390,20 +395,23 @@ public class NotebookMethods extends BaseLogin {
 
     public boolean TeacherLessonNameCheck(WebDriver driver, String mobNumber, String password) throws  IOException, InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        teacherblock(driver, mobNumber, password);
         this.note = new Notebook(driver);
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        boolean flag1, flag2, flag3;
+        user.userLogin("teacher", mobNumber, password);
+        Thread.sleep(5000);
+
         note.NotebookToggle().click();
+        Thread.sleep(5000);
 
         // Scrolling Page
         JavascriptExecutor js = (JavascriptExecutor) driver;
         String LessonName, LessonHeading;
 
         if (mob >= 9000000101l && mob <= 9000000104l) { // Environmental Studies Coursebook - Part A
-            boolean flag1, flag2, flag3;
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnvironmentalCoursebookGrade1()));
             note.EnvironmentalCoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            Thread.sleep(5000);
 
 //          lesson-1
             note.FirstLesson().click();
@@ -412,7 +420,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -421,7 +429,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -431,18 +439,18 @@ public class NotebookMethods extends BaseLogin {
 
             flag3= LessonNameValidateTest(LessonName, LessonHeading);
             Thread.sleep(5000);
+
             return flag1 && flag2 && flag3;
         }
 
         else if (mob >= 9000000105l && mob <= 9000000108l) { // Mathematics Coursebook - Part A
-            boolean flag1, flag2, flag3;
             WebElement element = note.MathematicsCoursebookGrade2();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            Thread.sleep(5000);
             element.click();
 
             note.FirstLesson().click(); //2-Digit Numbers click()
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            Thread.sleep(5000);
 
 //          lesson-1
             note.FirstLesson().click();
@@ -451,7 +459,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -460,7 +468,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -475,10 +483,9 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000109l && mob <= 9000000112l) { // Social Workbook - Part A
-            boolean flag1, flag2, flag3;
             WebElement element = note.SocialStudiesCoursebookGrade3();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            Thread.sleep(3000);
             element.click();
 
 //          lesson-1
@@ -488,7 +495,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -497,7 +504,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -507,16 +514,17 @@ public class NotebookMethods extends BaseLogin {
 
             flag3= LessonNameValidateTest(LessonName, LessonHeading);
             Thread.sleep(5000);
+
             return flag1 && flag2 && flag3;
+
         }
 
         else if (mob >= 9000000113l && mob <= 9000000116l) { // Science Coursebook - Part A
-            boolean flag1, flag2, flag3;
             WebElement element = note.ScienceCoursebookGrade4();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            Thread.sleep(5000);
             element.click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            Thread.sleep(5000);
 //          lesson-1
             note.FirstLesson().click();
             Thread.sleep(5000);
@@ -524,7 +532,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -533,7 +541,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -543,16 +551,17 @@ public class NotebookMethods extends BaseLogin {
 
             flag3= LessonNameValidateTest(LessonName, LessonHeading);
             Thread.sleep(5000);
+
             return flag1 && flag2 && flag3;
+
         }
 
         else if (mob >= 9000000117l && mob <= 9000000120l) { // Social Studies Coursebook - Part A
-            boolean flag1, flag2, flag3;
             WebElement element = note.SocialStudiesCoursebookGrade5();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            Thread.sleep(5000);
             element.click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            Thread.sleep(5000);
 
 //          lesson-1
             note.FirstLesson().click();
@@ -561,7 +570,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag1= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.SecondLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-2
             note.SecondLesson().click();
@@ -570,7 +579,7 @@ public class NotebookMethods extends BaseLogin {
             LessonHeading = note.LessonHeading();
 
             flag2= LessonNameValidateTest(LessonName, LessonHeading);
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            Thread.sleep(5000);
 
 //          Lesson-3
             note.ThirdLesson().click();
@@ -599,22 +608,21 @@ public class NotebookMethods extends BaseLogin {
     }
     public boolean CheckStudentHighlightsNotesBookmarks(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException, UnsupportedFlavorException {
         this.note = new Notebook(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Map<String, String> map = new HashMap<>();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Long mob = Long.parseLong(mobNumber);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+        ThreadSleep5000();
         note.LibraryToggle().click();
+        Thread.sleep(5000);
 
         if (mob >= 9000000001l && mob <= 9000000020l) {// English
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnvironmentalCoursebookGrade1()));
             note.EnvironmentalCoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -635,14 +643,14 @@ public class NotebookMethods extends BaseLogin {
             note.greenBtn().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnvironmentalCoursebookGrade1()));
-
+            driver.navigate().to(prop.getProperty("website")+"notebook");
+            ThreadSleep5000();
+            Thread.sleep(3000);
             note.EnvironmentalCoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.SearchIcon()));
+            Thread.sleep(2000);
 
             note.SearchIcon().click();
             ThreadSleep5000();
@@ -661,26 +669,24 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnvironmentalCoursebookGrade1()));
+            ThreadSleep5000();
 
             note.EnvironmentalCoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.EnvFirstLessonFirstTopicRefGrade1();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
@@ -688,12 +694,11 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000021l && mob <= 9000000040l) {// Mathematics
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade2()));
             note.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            ThreadSleep5000();
 
             note.ThirdLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -713,14 +718,14 @@ public class NotebookMethods extends BaseLogin {
             note.greenBtn().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
+            driver.navigate().to(prop.getProperty("website")+"notebook");
 
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade2()));
+            ThreadSleep5000();
             note.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            ThreadSleep5000();
 
             note.ThirdLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.SearchIcon()));
+            Thread.sleep(2000);
 
             note.SearchIcon().click();
             ThreadSleep5000();
@@ -738,26 +743,24 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade2()));
+            ThreadSleep5000();
 
             note.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            ThreadSleep5000();
             note.ThirdLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.EngThirdLessonFirstTopicRefGrade2();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
@@ -766,12 +769,11 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000041l && mob <= 9000000060l) {// Social Studies
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade3()));
             note.MathematicsCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -789,19 +791,20 @@ public class NotebookMethods extends BaseLogin {
             System.out.println(highlighted_text);
             map.put("Grade 3", highlighted_text);
             note.greenBtn().click();
+            ThreadSleep5000();;
+
+            driver.navigate().to(prop.getProperty("website")+"notebook");
+
+
+            ThreadSleep5000();
+            note.MathematicsCoursebookGrade3().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
-
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade3()));
-            note.MathematicsCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
-
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.SearchIcon()));
+            Thread.sleep(2000);
 
             note.SearchIcon().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.SearchInput()));
+            ThreadSleep5000();
 
             note.SearchInput().sendKeys(map.get("Grade 3"));
             ThreadSleep5000();
@@ -816,26 +819,24 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade3()));
+            ThreadSleep5000();
 
             note.MathematicsCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.MathFirstLessonFirstTopicRefGrade3();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
@@ -843,12 +844,11 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000061l && mob <= 9000000080l) {
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade4()));
             note.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -868,14 +868,15 @@ public class NotebookMethods extends BaseLogin {
             note.greenBtn().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade4()));
+            driver.navigate().to(prop.getProperty("website")+"notebook");
 
+
+            ThreadSleep5000();
             note.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.SearchIcon()));
+            Thread.sleep(2000);
 
             note.SearchIcon().click();
             ThreadSleep5000();
@@ -893,26 +894,24 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade4()));
+            ThreadSleep5000();
 
             note.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.EngFirstLessonFirstTopicRefGrade4();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
@@ -920,12 +919,11 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000081l && mob <= 9000000100l) {
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade5()));
             note.MathematicsCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -945,14 +943,15 @@ public class NotebookMethods extends BaseLogin {
             note.greenBtn().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade5()));
+            driver.navigate().to(prop.getProperty("website")+"notebook");
 
+
+            ThreadSleep5000();
             note.MathematicsCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.SearchIcon()));
+            Thread.sleep(2000);
 
             note.SearchIcon().click();
             ThreadSleep5000();
@@ -970,50 +969,49 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade5()));
+            ThreadSleep5000();
 
             note.MathematicsCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.MathFirstLessonFirstTopicRefGrade5();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
             return ValidateHighlightNotesBookmark(highlighted_text, content_in_notebook);
         }
+
+
+
         return false;
     }
 
     public boolean CheckTeacherHighlightsNotesBookmarks(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException, UnsupportedFlavorException {
         this.note = new Notebook(driver);
         Map<String, String> map = new HashMap<>();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Long mob = Long.parseLong(mobNumber);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+        ThreadSleep5000();
         note.LibraryToggle().click();
         if (mob >= 9000000101l && mob <= 9000000104l) {// English
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnvironmentalCoursebookGrade1()));
             note.EnvironmentalCoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -1030,24 +1028,23 @@ public class NotebookMethods extends BaseLogin {
             ThreadSleep5000();
             System.out.println(highlighted_text);
             map.put("Grade 1", highlighted_text);
-
             note.greenBtn().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnvironmentalCoursebookGrade1()));
+            driver.navigate().to(prop.getProperty("website")+"notebook");
 
+
+            ThreadSleep5000();
             note.EnvironmentalCoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
-
-            note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.TeacherSearchIcon()));
-
-            note.TeacherSearchIcon().click();
             ThreadSleep5000();
 
-            String searchcontent = map.get("Grade 1");
-            note.SearchInput().sendKeys(searchcontent);
+            note.FirstLesson().click();
+            Thread.sleep(2000);
+
+            note.oldSearchIcon().click();
+            ThreadSleep5000();
+
+            note.SearchInput().sendKeys(map.get("Grade 1"));
             ThreadSleep5000();
 
             List<WebElement> contents = note.contents();
@@ -1060,26 +1057,24 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnvironmentalCoursebookGrade1()));
+            ThreadSleep5000();
 
             note.EnvironmentalCoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.EnvFirstLessonFirstTopicRefGrade1();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
@@ -1087,12 +1082,11 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000105l && mob <= 9000000108l) {// Mathematics
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade2()));
             note.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            ThreadSleep5000();
 
             note.ThirdLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -1112,16 +1106,16 @@ public class NotebookMethods extends BaseLogin {
             note.greenBtn().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
+            driver.navigate().to(prop.getProperty("website")+"notebook");
 
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade2()));
+            ThreadSleep5000();
             note.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            ThreadSleep5000();
 
             note.ThirdLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.TeacherSearchIcon()));
+            Thread.sleep(2000);
 
-            note.TeacherSearchIcon().click();
+            note.oldSearchIcon().click();
             ThreadSleep5000();
 
             note.SearchInput().sendKeys(map.get("Grade 2"));
@@ -1137,26 +1131,24 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade2()));
+            ThreadSleep5000();
 
             note.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.ThirdLesson()));
+            ThreadSleep5000();
             note.ThirdLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.EngThirdLessonFirstTopicRefGrade2();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
@@ -1164,12 +1156,11 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000109l && mob <= 9000000112l) {// Social Studies
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade3()));
             note.MathematicsCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -1189,17 +1180,18 @@ public class NotebookMethods extends BaseLogin {
             note.greenBtn().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
+            driver.navigate().to(prop.getProperty("website")+"notebook");
 
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade3()));
+
+            ThreadSleep5000();
             note.MathematicsCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.TeacherSearchIcon()));
+            Thread.sleep(2000);
 
-            note.TeacherSearchIcon().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.SearchInput()));
+            note.oldSearchIcon().click();
+            ThreadSleep5000();
 
             note.SearchInput().sendKeys(map.get("Grade 3"));
             ThreadSleep5000();
@@ -1214,26 +1206,24 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade3()));
+            ThreadSleep5000();
 
             note.MathematicsCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.MathFirstLessonFirstTopicRefGrade3();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
@@ -1241,12 +1231,11 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000113l && mob <= 9000000116l) {
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade4()));
             note.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -1266,16 +1255,16 @@ public class NotebookMethods extends BaseLogin {
             note.greenBtn().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade4()));
+            driver.navigate().to(prop.getProperty("website")+"notebook");
 
+            ThreadSleep5000();
             note.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.TeacherSearchIcon()));
+            Thread.sleep(2000);
 
-            note.TeacherSearchIcon().click();
+            note.oldSearchIcon().click();
             ThreadSleep5000();
 
             note.SearchInput().sendKeys(map.get("Grade 4"));
@@ -1291,26 +1280,24 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.EnglishCoursebookGrade4()));
+            ThreadSleep5000();
 
             note.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.EngFirstLessonFirstTopicRefGrade4();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
@@ -1318,12 +1305,11 @@ public class NotebookMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000117l && mob <= 9000000120l) {
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade5()));
             note.MathematicsCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
 
             note.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
@@ -1343,16 +1329,16 @@ public class NotebookMethods extends BaseLogin {
             note.greenBtn().click();
             ThreadSleep5000();
 
-            driver.navigate().to("https://test.onelern.school/"+"notebook");
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade5()));
+            driver.navigate().to(prop.getProperty("website")+"notebook");
 
+            ThreadSleep5000();
             note.MathematicsCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
 
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.TeacherSearchIcon()));
+            Thread.sleep(2000);
 
-            note.TeacherSearchIcon().click();
+            note.oldSearchIcon().click();
             ThreadSleep5000();
 
             note.SearchInput().sendKeys(map.get("Grade 5"));
@@ -1368,31 +1354,30 @@ public class NotebookMethods extends BaseLogin {
             }
 
             // Remove Highlighted content
-            Thread.sleep(2000);
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.BackButton()));
-            Thread.sleep(2000);
+            ThreadSleep5000();
             note.BackButton().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.LibraryToggle()));
+            ThreadSleep5000();
 
             note.LibraryToggle().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.MathematicsCoursebookGrade5()));
+            ThreadSleep5000();
 
             note.MathematicsCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstLesson()));
+            ThreadSleep5000();
             note.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(note.FirstTopic()));
+            ThreadSleep5000();
             note.FirstTopic().click();
             ThreadSleep5000();
             ThreadSleep5000();
             WebElement element1 = note.MathFirstLessonFirstTopicRefGrade5();
             action.moveToElement(element1,-init_xOffset,0).click().keyDown(Keys.SHIFT).moveToElement(element1,60, 0).click().keyUp(Keys.SHIFT).build().perform();
-            wait.until(ExpectedConditions.elementToBeClickable(note.deleteBtn()));
+            ThreadSleep5000();
             note.deleteBtn().click();
             ThreadSleep5000();
 
             return ValidateHighlightNotesBookmark(highlighted_text, content_in_notebook);
         }
+
         return false;
     }
 

@@ -91,12 +91,14 @@ public class LibraryMethods extends BaseLogin {
     }
     public boolean CheckStudentBookGrade(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        studentblock(driver, mobNumber, password);
         this.lib = new Library(driver);
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("student", mobNumber, password);
+        ThreadSleep5000();
         lib.LibraryToggle().click();
+        ThreadSleep5000();
         if (mob >= 9000000001l && mob <= 9000000020l) {// English
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade1()));
             String actual_grade = lib.EnglishGradeTextGrade1().getText();
             String expected_grade = "GRADE 1";
 
@@ -104,7 +106,6 @@ public class LibraryMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000021l && mob <= 9000000040l) {// English
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade2()));
             String actual_grade = lib.EnglishGradeTextGrade2().getText();
             String expected_grade = "GRADE 2";
 
@@ -113,7 +114,6 @@ public class LibraryMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000041l && mob <= 9000000060l) {// English
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade3()));
             String actual_grade = lib.EnglishGradeTextGrade3().getText();
             String expected_grade = "GRADE 3";
 
@@ -121,7 +121,6 @@ public class LibraryMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000061l && mob <= 9000000080l) {
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade4()));
             String actual_grade = lib.EnglishGradeTextGrade4().getText();
             String expected_grade = "GRADE 4";
 
@@ -129,24 +128,24 @@ public class LibraryMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000081l && mob <= 9000000100l) {
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade5()));
             String actual_grade = lib.EnglishGradeTextGrade5().getText();
             String expected_grade = "GRADE 5";
 
             return GradeCheckValidateTest(actual_grade, expected_grade);
         }
+
         return false;
     }
 
     public boolean CheckTeacherBookGrade(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        teacherblock(driver, mobNumber, password);
         this.lib = new Library(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(lib.LibraryToggle()));
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("teacher", mobNumber, password);
+        ThreadSleep5000();
         lib.LibraryToggle().click();
         if (mob >= 9000000101l && mob <= 9000000104l) {
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade1()));
             String actual_grade = lib.EnglishGradeTextGrade1().getText();
             String expected_grade = "GRADE 1";
 
@@ -154,7 +153,6 @@ public class LibraryMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000105l && mob <= 9000000108l) {
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade2()));
             String actual_grade = lib.EnglishGradeTextGrade2().getText();
             String expected_grade = "GRADE 2";
 
@@ -162,7 +160,6 @@ public class LibraryMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000109l && mob <= 9000000112l) {
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade3()));
             String actual_grade = lib.EnglishGradeTextGrade3().getText();
             String expected_grade = "GRADE 3";
 
@@ -170,7 +167,6 @@ public class LibraryMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000113l && mob <= 9000000116l) {
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade4()));
             String actual_grade = lib.EnglishGradeTextGrade4().getText();
             String expected_grade = "GRADE 4";
 
@@ -178,12 +174,12 @@ public class LibraryMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000117l && mob <= 9000000120l) {
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishGradeTextGrade5()));
             String actual_grade = lib.EnglishGradeTextGrade5().getText();
             String expected_grade = "GRADE 5";
 
             return GradeCheckValidateTest(actual_grade, expected_grade);
         }
+
         return false;
     }
 
@@ -202,20 +198,22 @@ public class LibraryMethods extends BaseLogin {
 
     public boolean StudentWorkbookCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        studentblock(driver, mobNumber, password);
         this.lib = new Library(driver);
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("student", mobNumber, password);
+        ThreadSleep5000();
+        lib.StudentImageClick().click();
+        ThreadSleep5000();
         lib.LibraryToggle().click();
-
+        ThreadSleep5000();
 
         // Scrolling page
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         if (mob >= 9000000001l && mob <= 9000000020l) { // Environmental Studies Coursebook - Part A
             lib.EnvironmentalcoursebookGrade1().click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-//            wait.until(ExpectedConditions.textToBePresentInElement(lib.WorkbookHeading(), "Environmental Studies Coursebook - Part A"));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "Environmental Studies Coursebook - Part A";
 
@@ -225,10 +223,9 @@ public class LibraryMethods extends BaseLogin {
         else if (mob >= 9000000021l && mob <= 9000000040l) { // English Coursebook - Part A
             WebElement element = lib.EnglishCoursebookGrade2();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ThreadSleep5000();
             element.click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "English Coursebook - Part A";
 
@@ -237,10 +234,9 @@ public class LibraryMethods extends BaseLogin {
         else if (mob >= 9000000041l && mob <= 9000000060l) { // Mathematics Coursebook - Part A
             WebElement element = lib.MathematicsCoursebookGrade3();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ThreadSleep5000();
             element.click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "Mathematics Coursebook - Part A";
 
@@ -250,10 +246,9 @@ public class LibraryMethods extends BaseLogin {
         else if (mob >= 9000000061l && mob <= 9000000080l) { // English Coursebook - Part A
             WebElement element = lib.EnglishCoursebookGrade4();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ThreadSleep5000();
             element.click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "English Coursebook - Part A";
 
@@ -263,10 +258,9 @@ public class LibraryMethods extends BaseLogin {
         else if (mob >= 9000000081l && mob <= 9000000100l) { // Mathematics Coursebook - Part A
             WebElement element = lib.MathematicsCoursebookGrade5();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ThreadSleep5000();
             element.click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "Mathematics Coursebook - Part A";
 
@@ -277,10 +271,13 @@ public class LibraryMethods extends BaseLogin {
 
     public boolean TeacherWorkbookCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        teacherblock(driver, mobNumber, password);
         this.lib = new Library(driver);
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("teacher", mobNumber, password);
+        ThreadSleep5000();
         lib.LibraryToggle().click();
+        ThreadSleep5000();
 
         // Scrolling page
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -288,10 +285,9 @@ public class LibraryMethods extends BaseLogin {
         if (mob >= 9000000101l && mob <= 9000000104l) { // Environmental Studies Coursebook - Part A
             WebElement element = lib.EnvironmentalcoursebookGrade1();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ThreadSleep5000();
             element.click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "Environmental Studies Coursebook - Part A";
 
@@ -301,10 +297,9 @@ public class LibraryMethods extends BaseLogin {
         else if (mob >= 9000000105l && mob <= 9000000108l) { // English Coursebook - Part A
             WebElement element = lib.EnglishCoursebookGrade2();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ThreadSleep5000();
             element.click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "English Coursebook - Part A";
 
@@ -314,10 +309,9 @@ public class LibraryMethods extends BaseLogin {
         else if (mob >= 9000000109l && mob <= 9000000112l) { // Mathematics Coursebook - Part A
             WebElement element = lib.MathematicsCoursebookGrade3();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ThreadSleep5000();
             element.click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "Mathematics Coursebook - Part A";
 
@@ -327,10 +321,9 @@ public class LibraryMethods extends BaseLogin {
         else if (mob >= 9000000113l && mob <= 9000000116l) { // English Coursebook - Part A
             WebElement element = lib.EnglishCoursebookGrade4();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ThreadSleep5000();
             element.click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "English Coursebook - Part A";
 
@@ -340,15 +333,15 @@ public class LibraryMethods extends BaseLogin {
         else if (mob >= 9000000117l && mob <= 9000000120l) { // Mathematics Coursebook - Part A
             WebElement element = lib.MathematicsCoursebookGrade5();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+            ThreadSleep5000();
             element.click();
-//            wait.until(ExpectedConditions.elementToBeClickable(lib.WorkbookHeading()));
-            Thread.sleep(3000);
+            ThreadSleep5000();
             String text = lib.WorkbookHeading().getText();
             String workbookName = "Mathematics Coursebook - Part A";
 
             return  WorkbookNameValidateTest(workbookName, text);
         }
+
         return false;
     }
 
@@ -1001,9 +994,9 @@ public class LibraryMethods extends BaseLogin {
 
     public boolean StudentLessonTopicCheck(WebDriver driver, String mobNumber, String password) throws  IOException, InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        this.lib = new Library(driver);
         Long mob = Long.parseLong(mobNumber);
         studentblock(driver, mobNumber, password);
-        this.lib = new Library(driver);
         wait.until(ExpectedConditions.elementToBeClickable(lib.LibraryToggle()));
         lib.LibraryToggle().click();
 
@@ -1543,28 +1536,35 @@ public class LibraryMethods extends BaseLogin {
         }
     }
     public boolean StudentAudioCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        studentblock(driver, mobNumber, password);
         this.lib = new Library(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(lib.LibraryToggle()));
-        lib.LibraryToggle().click();
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("student", mobNumber, password);
 
+        Thread.sleep(5000);
+        lib.LibraryToggle().click();
+        Thread.sleep(5000);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         if (mob >= 9000000001l && mob <= 9000000020l){ // Environmental Studies Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnvironmentalcoursebookGrade1()));
             lib.EnvironmentalcoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.SecondLesson()));
+            ThreadSleep3000();
             lib.SecondLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             lib.FirstTopic().click();
             ThreadSleep5000();
 
-            WebElement element = lib.AudioPlayer();
+            WebElement element = lib.AudioPlayBtn();
             js.executeScript("arguments[0].scrollIntoView();", element);
+            ThreadSleep5000(); ThreadSleep5000();
+
+//            WebElement element = lib.AudioPlayer();
+//            Actions actions = new Actions(driver);
+//            actions.moveToElement(element).click().build().perform();
+//            ThreadSleep5000(); ThreadSleep5000();
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.elementToBeClickable(lib.AudioPlayBtn()));
-            Thread.sleep(3000);
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
 
@@ -1572,19 +1572,17 @@ public class LibraryMethods extends BaseLogin {
             return AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000021l && mob <= 9000000040l){ // English Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade2()));
             lib.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EngCommunicationTopic()));
+            ThreadSleep3000();
 
             lib.EngCommunicationTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
 
             WebElement element = lib.AudioPlayer();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(lib.AudioPlayBtn()));
-            Thread.sleep(3000);
+            ThreadSleep5000(); ThreadSleep5000();
 
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
@@ -1593,19 +1591,17 @@ public class LibraryMethods extends BaseLogin {
             return AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000041l && mob <= 9000000060l){ // English Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade3()));
             lib.EnglishCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EngCommunicationTopic()));
+            ThreadSleep3000();
 
             lib.EngCommunicationTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
 
             WebElement element = lib.AudioPlayer();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(lib.AudioPlayBtn()));
-            Thread.sleep(3000);
+            ThreadSleep5000(); ThreadSleep5000();
 
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
@@ -1614,19 +1610,17 @@ public class LibraryMethods extends BaseLogin {
             return AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000061l && mob <= 9000000080l){ // English Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade4()));
             lib.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EngCommunicationTopic()));
+            ThreadSleep3000();
 
             lib.EngCommunicationTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
 
             WebElement element = lib.AudioPlayer();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(lib.AudioPlayBtn()));
-            Thread.sleep(3000);
+            ThreadSleep5000(); ThreadSleep5000();
 
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
@@ -1635,19 +1629,17 @@ public class LibraryMethods extends BaseLogin {
             return AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000081l && mob <= 9000000100l){ // English Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade5()));
             lib.EnglishCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EngCommunicationTopic()));
+            ThreadSleep3000();
 
             lib.EngCommunicationTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
 
             WebElement element = lib.AudioPlayer();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
-            Thread.sleep(3000);
+            ThreadSleep5000(); ThreadSleep5000();
 
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
@@ -1655,34 +1647,34 @@ public class LibraryMethods extends BaseLogin {
             String curr_time = lib.CurrPlayTime().getText();
             return AudioCheckValidateTest(curr_time);
         }
+
         return false;
     }
 
     public boolean teacherAudiocheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        teacherblock(driver, mobNumber, password);
         this.lib = new Library(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(lib.LibraryToggle()));
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("teacher", mobNumber, password);
+        ThreadSleep5000();
         lib.LibraryToggle().click();
+        ThreadSleep5000();
 
         // Scrolling Page
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         if (mob >= 9000000101l && mob <= 9000000104l) { // English Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnvironmentalcoursebookGrade1()));
             lib.EnvironmentalcoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.SecondLesson()));
+            ThreadSleep3000();
             lib.SecondLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             lib.FirstTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
 
             WebElement element = lib.AudioPlayer();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(lib.AudioPlayBtn()));
-            Thread.sleep(3000);
+            ThreadSleep5000(); ThreadSleep5000();
 
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
@@ -1691,19 +1683,17 @@ public class LibraryMethods extends BaseLogin {
             return AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000105l && mob <= 9000000108l) { // English Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade2()));
             lib.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EngCommunicationTopic()));
+            ThreadSleep3000();
 
             lib.EngCommunicationTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
 
             WebElement element = lib.AudioPlayer();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(lib.AudioPlayBtn()));
-            Thread.sleep(3000);
+            ThreadSleep5000(); ThreadSleep5000();
 
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
@@ -1712,19 +1702,17 @@ public class LibraryMethods extends BaseLogin {
             return AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000109l && mob <= 9000000112l) { // English Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade3()));
             lib.EnglishCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EngCommunicationTopic()));
+            ThreadSleep3000();
 
             lib.EngCommunicationTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
 
             WebElement element = lib.AudioPlayer();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(lib.AudioPlayBtn()));
-            Thread.sleep(3000);
+            ThreadSleep5000(); ThreadSleep5000();
 
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
@@ -1733,19 +1721,17 @@ public class LibraryMethods extends BaseLogin {
             return AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000113l && mob <= 9000000116l) { // English Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade4()));
             lib.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EngCommunicationTopic()));
+            ThreadSleep3000();
 
             lib.EngCommunicationTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
 
             WebElement element = lib.AudioPlayer();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(lib.AudioPlayBtn()));
-            Thread.sleep(3000);
+            ThreadSleep5000(); ThreadSleep5000();
 
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
@@ -1754,19 +1740,17 @@ public class LibraryMethods extends BaseLogin {
             return AudioCheckValidateTest(curr_time);
         }
         else if (mob >= 9000000117l && mob <= 9000000120l) { // English Coursebook - Part A
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade5()));
             lib.EnglishCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EngCommunicationTopic()));
+            ThreadSleep3000();
 
             lib.EngCommunicationTopic().click();
             ThreadSleep5000(); ThreadSleep5000();
 
             WebElement element = lib.AudioPlayer();
             js.executeScript("arguments[0].scrollIntoView();", element);
-            wait.until(ExpectedConditions.elementToBeClickable(lib.AudioPlayBtn()));
-            Thread.sleep(3000);
+            ThreadSleep5000(); ThreadSleep5000();
 
             lib.AudioPlayBtn().click();
             ThreadSleep5000();
@@ -1774,6 +1758,7 @@ public class LibraryMethods extends BaseLogin {
             String curr_time = lib.CurrPlayTime().getText();
             return AudioCheckValidateTest(curr_time);
         }
+
         return false;
     }
 
@@ -1804,24 +1789,24 @@ public class LibraryMethods extends BaseLogin {
 
     public boolean studentVideocheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.lib = new Library(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Long mob = Long.parseLong(mobNumber);
-        studentblock(driver, mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(lib.LibraryToggle()));
-        lib.LibraryToggle().click();
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("student", mobNumber, password);
+        ThreadSleep3000();
 
+        lib.LibraryToggle().click();
+        ThreadSleep3000();
+        boolean flag1, flag2;
         // Scrolling Page
         js = (JavascriptExecutor) driver;
         if (mob >= 9000000001l && mob <= 9000000020l) { // Environmental Studies Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnvironmentalcoursebookGrade1()));
             lib.EnvironmentalcoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -1837,7 +1822,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -1855,15 +1840,14 @@ public class LibraryMethods extends BaseLogin {
             return flag1 && flag2;
         }
         else if (mob >= 9000000021l && mob <= 9000000040l) { // English Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade2()));
+            Thread.sleep(10000);
             lib.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -1879,7 +1863,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -1897,15 +1881,14 @@ public class LibraryMethods extends BaseLogin {
             return flag1 && flag2;
         }
         else if (mob >= 9000000041l && mob <= 9000000060l) { // English Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade3()));
+            Thread.sleep(10000);
             lib.EnglishCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -1921,7 +1904,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -1939,15 +1922,14 @@ public class LibraryMethods extends BaseLogin {
             return flag1 && flag2;
         }
         else if (mob >= 9000000061l && mob <= 9000000080l) { // English Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade4()));
+            Thread.sleep(10000);
             lib.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -1963,7 +1945,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -1981,15 +1963,14 @@ public class LibraryMethods extends BaseLogin {
             return flag1 && flag2;
         }
         else if (mob >= 9000000081l && mob <= 9000000100l) { // Mathematics Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.MathematicsCoursebookGrade5()));
+            Thread.sleep(10000);
             lib.MathematicsCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -2005,7 +1986,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -2019,6 +2000,7 @@ public class LibraryMethods extends BaseLogin {
             ThreadSleep3000();
 
             flag2= ValidateVideoStatus();
+
             return flag1 && flag2;
         }
         return false;
@@ -2027,25 +2009,25 @@ public class LibraryMethods extends BaseLogin {
 
     public boolean teacherVideocheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        teacherblock(driver, mobNumber, password);
         this.lib = new Library(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(lib.LibraryToggle()));
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("teacher", mobNumber, password);
+        ThreadSleep5000();
         lib.LibraryToggle().click();
-
+        ThreadSleep5000();
+        boolean flag1, flag2;
         // Scrolling Page
         js = (JavascriptExecutor) driver;
 
         if (mob >= 9000000101l && mob <= 9000000104l) { // Environmental Studies Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnvironmentalcoursebookGrade1()));
             lib.EnvironmentalcoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -2061,7 +2043,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -2079,15 +2061,14 @@ public class LibraryMethods extends BaseLogin {
             return flag1 && flag2;
         }
         else if (mob >= 9000000105l && mob <= 9000000108l) { // English Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade2()));
+            Thread.sleep(10000);
             lib.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -2103,7 +2084,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -2119,18 +2100,16 @@ public class LibraryMethods extends BaseLogin {
             flag2= ValidateVideoStatus();
 
             return flag1 && flag2;
-
         }
         else if (mob >= 9000000109l && mob <= 9000000112l) { // English Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade3()));
+            Thread.sleep(10000);
             lib.EnglishCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -2146,7 +2125,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -2164,15 +2143,14 @@ public class LibraryMethods extends BaseLogin {
             return flag1 && flag2;
         }
         else if (mob >= 9000000113l && mob <= 9000000116l) { // English Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade4()));
+            Thread.sleep(10000);
             lib.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -2188,7 +2166,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -2204,18 +2182,16 @@ public class LibraryMethods extends BaseLogin {
             flag2= ValidateVideoStatus();
 
             return flag1 && flag2;
-
         }
         else if (mob >= 9000000117l && mob <= 9000000120l) { // Mathematics Coursebook - Part A
-            boolean flag1, flag2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.MathematicsCoursebookGrade5()));
+            Thread.sleep(10000);
             lib.MathematicsCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.videosPageTab()));
+            ThreadSleep3000();
 
             lib.videosPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.VideoWatchBtn()));
+            ThreadSleep3000();
             lib.VideoWatchBtn().click();
             ThreadSleep3000();
 
@@ -2231,7 +2207,7 @@ public class LibraryMethods extends BaseLogin {
 
             //contents
             lib.ContentsPageTab().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstTopic()));
+            ThreadSleep3000();
 
             //click first topic
             lib.FirstTopic().click();
@@ -2245,6 +2221,7 @@ public class LibraryMethods extends BaseLogin {
             ThreadSleep3000();
 
             flag2= ValidateVideoStatus();
+
             return flag1 && flag2;
         }
         return false;
@@ -2265,22 +2242,25 @@ public class LibraryMethods extends BaseLogin {
 
     public boolean StudentSearchCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        studentblock(driver, mobNumber, password);
         this.lib = new Library(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(lib.LibraryToggle()));
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("student", mobNumber, password);
+        lib.StudentImageClick().click();
+
+        ThreadSleep3000();
         lib.LibraryToggle().click();
+        ThreadSleep3000();
 
         if (mob >= 9000000001l && mob <= 9000000020l){ // Environmental Studies Coursebook - Part A
             String search_text= "good";
             int expected_count=4;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnvironmentalcoursebookGrade1()));
+
             lib.EnvironmentalcoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.ThirdLesson()));
+            ThreadSleep3000();
             //click third lesson
             lib.ThirdLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.SearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.SearchIcon().click();
@@ -2295,17 +2275,17 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
         else if (mob >= 9000000021l && mob <= 9000000040l){ // English Coursebook - Part A
             String search_text= "read";
             int expected_count= 3;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade2()));
+
             lib.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             //click first lesson
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.SearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.SearchIcon().click();
@@ -2320,17 +2300,17 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
         else if (mob >= 9000000041l && mob <= 9000000060l){ // Mathematics Coursebook - Part A
             String search_text= "digit";
             int expected_count= 3;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.MathematicsCoursebookGrade3()));
+
             lib.MathematicsCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             //click first lesson
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.SearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.SearchIcon().click();
@@ -2345,17 +2325,17 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
         else if (mob >= 9000000061l && mob <= 9000000080l){ // English Coursebook - Part A
             String search_text= "read";
             int expected_count= 3;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade4()));
+
             lib.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             //click first lesson
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.SearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.SearchIcon().click();
@@ -2370,17 +2350,17 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
         else if (mob >= 9000000081l && mob <= 9000000100l){ // English Coursebook - Part A
             String search_text= "learn";
             int expected_count= 2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade5()));
+
             lib.EnglishCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             //click first lesson
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.SearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.SearchIcon().click();
@@ -2395,29 +2375,32 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
+
         return false;
     }
 
 
     public boolean TeacherSearchCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
-        teacherblock(driver, mobNumber, password);
         this.lib = new Library(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(lib.LibraryToggle()));
+        Long mob = Long.parseLong(mobNumber);
+        BaseLogin user = new BaseLogin(driver);
+        user.userLogin("teacher", mobNumber, password);
+        Thread.sleep(5000);
         lib.LibraryToggle().click();
+        ThreadSleep5000();
 
         if (mob >= 9000000101l && mob <= 9000000104l){ // Environmental Studies Coursebook - Part A
             String search_text= "good";
             int expected_count=4;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnvironmentalcoursebookGrade1()));
+
             lib.EnvironmentalcoursebookGrade1().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.ThirdLesson()));
+            ThreadSleep3000();
             //click third lesson
             lib.ThirdLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.TeacherSearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.TeacherSearchIcon().click();
@@ -2432,17 +2415,17 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
         else if (mob >= 9000000105l && mob <= 9000000108l){ // English Coursebook - Part A
             String search_text= "read";
             int expected_count= 3;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade2()));
+
             lib.EnglishCoursebookGrade2().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             //click first lesson
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.TeacherSearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.TeacherSearchIcon().click();
@@ -2457,17 +2440,17 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
         else if (mob >= 9000000109l && mob <= 9000000112l){ // Mathematics Coursebook - Part A
             String search_text= "digit";
             int expected_count= 3;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.MathematicsCoursebookGrade3()));
+
             lib.MathematicsCoursebookGrade3().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             //click first lesson
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.TeacherSearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.TeacherSearchIcon().click();
@@ -2482,17 +2465,17 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
         else if (mob >= 9000000113l && mob <= 9000000116l){ // English Coursebook - Part A
             String search_text= "read";
             int expected_count= 3;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade4()));
+
             lib.EnglishCoursebookGrade4().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             //click first lesson
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.TeacherSearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.TeacherSearchIcon().click();
@@ -2507,17 +2490,17 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
         else if (mob >= 9000000117l && mob <= 9000000120l){ // English Coursebook - Part A
             String search_text= "learn";
             int expected_count= 2;
-            wait.until(ExpectedConditions.elementToBeClickable(lib.EnglishCoursebookGrade5()));
+
             lib.EnglishCoursebookGrade5().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.FirstLesson()));
+            ThreadSleep3000();
             //click first lesson
             lib.FirstLesson().click();
-            wait.until(ExpectedConditions.elementToBeClickable(lib.TeacherSearchIcon()));
-            Thread.sleep(3000);
+            ThreadSleep3000();
 
             // click on search icon
             lib.TeacherSearchIcon().click();
@@ -2532,7 +2515,9 @@ public class LibraryMethods extends BaseLogin {
             int search_elements_size = search_elements.size();
 
             return SearchCheckValidateTest(expected_count, countInSearchBox, search_elements_size);
+
         }
+
         return false;
     }
 

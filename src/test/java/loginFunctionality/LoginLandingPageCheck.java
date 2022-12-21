@@ -30,7 +30,7 @@ public class LoginLandingPageCheck extends Base {
 	}
 
 	@Epic("Login functionality of the onelern_school project.")
-	@Description("Examin Teacher toggle check")
+	@Description("Examine Teacher toggle check")
 	@Story("LOGFT_01")
 	@Test(priority = 2)
 	@Severity(SeverityLevel.BLOCKER)
@@ -39,7 +39,7 @@ public class LoginLandingPageCheck extends Base {
 	}
 
 	@Epic("Login functionality of the onelern_school project.")
-	@Description("Examin Student Toggel check ")
+	@Description("Examine Student Toggle check ")
 	@Story("LOGFS_01")
 	@Test(priority = 1)
 	@Severity(SeverityLevel.BLOCKER)

@@ -102,46 +102,46 @@ public class UserSignInFunctionality extends Base {
 	@DataProvider(name = "StudentLoginPageCorrectCredentials_Data")
 	public Object[][] getDataSLPC() {
 
-//		Object[][] loginData = { { "9000000010", "123456" }, { "9000000024", "123456" }, { "9000000056", "123456" },
-//				{ "9000000085", "123456" }, { "9000000091", "123456" } };
+		Object[][] loginData = { { "9000000010", "123456" }, { "9000000024", "123456" }, { "9000000056", "123456" },
+				{ "9000000085", "123456" }, { "9000000091", "123456" } };
 //		Object[][] loginData = { { "9000000001", "123456" } };
-		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("SLPC");
+//		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("SLPC");
 		return loginData;
 	}
 
 	@DataProvider(name = "StudentLoginPageIncorrectPassword_Data")
 	public Object[][] getDataSLPIP() {
 
-//		Object[][] loginData = { { "9000000010", "18" }, { "9000000024", "123456789" }, { "9000000056", " " },
-//				{ "9000000085", "12380761" }, { "9000000091", "1234987615" } };
-		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("SLPIP");
+		Object[][] loginData = { { "9000000010", "18" }, { "9000000024", "123456789" }, { "9000000056", " " },
+				{ "9000000085", "12380761" }, { "9000000091", "1234987615" } };
+//		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("SLPIP");
 		return loginData;
 	}
 
 	@DataProvider(name = "IncorrectuserMobileNoCheck_Data")
 	public Object[][] getDataIUMNC() {
 
-//		Object[][] loginData = { { "9007000010", "18" }, { "900", "123456789" }, { "8000000056687", "12345318" },
-//				{ "900000824185", "12380761" }, { "90000", "1234987615" } };
-		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("IUMNC");
+		Object[][] loginData = { { "9007000010", "18" }, { "900", "123456789" }, { "8000000056687", "12345318" },
+				{ "900000824185", "12380761" }, { "90000", "1234987615" } };
+//		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("IUMNC");
 		return loginData;
 	}
 
 	@DataProvider(name = "TeacherLoginPageCorrectCredentials_Data")
 	public Object[][] getDataTLPCC() {
 
-//		Object[][] loginData = { { "9000000102", "123456" }, { "9000000105", "123456" }, { "9000000111", "123456" },
-//				{ "9000000115", "123456" }, { "9000000118", "123456" } };
-		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("TLPCC");
+		Object[][] loginData = { { "9000000102", "123456" }, { "9000000105", "123456" }, { "9000000111", "123456" },
+				{ "9000000115", "123456" }, { "9000000118", "123456" } };
+//		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("TLPCC");
 		return loginData;
 	}
 
 	@DataProvider(name = "TeacherLoginPageIncorrectPassword_Data")
 	public Object[][] getDataTLPIP() {
 
-//		Object[][] loginData = { { "9000000102", "12" }, { "9000000105", "  " }, { "9000000111", "123456789" },
-//				{ "9000000115", "12345610" }, { "9000000118", "1234567894651" } };
-		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("TLPIP");
+		Object[][] loginData = { { "9000000102", "12" }, { "9000000105", "  " }, { "9000000111", "123456789" },
+				{ "9000000115", "12345610" }, { "9000000118", "1234567894651" } };
+//		Object[][] loginData = ReadExcelFile.LoginTestCasesCredentials("TLPIP");
 		return loginData;
 	}
 

@@ -16,6 +16,7 @@ import pageObjects.Doubts;
 import resources.Base;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;
 
 public class AttendanceFunctionalities extends Base {
@@ -36,7 +37,7 @@ public class AttendanceFunctionalities extends Base {
     @Description("Examine whether or not the student can successfully get inside the Attendance module.")
     @Story("ATTFS_01")
     @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "studentdata")
+    @Test(dataProvider = "studentData")
     public void studentLanding(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(attmethods.studentLanding(driver, mobNumber, password));
     }
@@ -45,7 +46,7 @@ public class AttendanceFunctionalities extends Base {
     @Description("Examine whether or not the teacher can successfully get inside the Attendance module.")
     @Story("ATTFT_01")
     @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "teacherdata")
+    @Test(dataProvider = "teacherData")
     public void teacherLanding(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(attmethods.teacherLanding(driver, mobNumber, password));
     }
@@ -53,8 +54,8 @@ public class AttendanceFunctionalities extends Base {
     @Epic("This story represents the Attendance module of the onelern_school project.")
     @Description("Examine whether or not the student can view the count of present, absent, leave, and holiday correctly.")
     @Story("ATTFS_02")
-    @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "studentdata")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(dataProvider = "studentData")
     public void studentPALHCountCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(attmethods.studentPALHCountCheck(driver, mobNumber, password));
     }
@@ -62,8 +63,8 @@ public class AttendanceFunctionalities extends Base {
     @Epic("This story represents the Attendance module of the onelern_school project.")
     @Description("Examine whether or not the teacher can view the count of present, absent, and leave correctly.")
     @Story("ATTFT_02")
-    @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "teacherdata")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(dataProvider = "teacherData")
     public void teacherPALCountCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(attmethods.teacherPALCountCheck(driver, mobNumber, password));
     }
@@ -73,7 +74,7 @@ public class AttendanceFunctionalities extends Base {
     @Description("Examine whether or not the teacher can mark a day as holiday or mark attendance for any particular day.")
     @Story("ATTFT_03")
     @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "teacherdata")
+    @Test(dataProvider = "teacherData")
     public void teacherMarkHolidayCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(attmethods.teacherMarkHolidayCheck(driver, mobNumber, password));
     }
@@ -81,8 +82,8 @@ public class AttendanceFunctionalities extends Base {
     @Epic("This story represents the Attendance module of the onelern_school project.")
     @Description("Examine whether or not the student can successfully the attendance percentage calculated monthly.")
     @Story("ATTFS_03")
-    @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "studentdata")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(dataProvider = "studentData")
     public void studentPercentageCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(attmethods.studentPercentageCheck(driver, mobNumber, password));
     }
@@ -90,8 +91,8 @@ public class AttendanceFunctionalities extends Base {
     @Epic("This story represents the Attendance module of the onelern_school project.")
     @Description("Examine whether or not the student can navigate to next pages through pagination.")
     @Story("ATTFS_04")
-    @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "studentdata")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(dataProvider = "studentData")
     public void studentPaginationCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(attmethods.studentPaginationCheck(driver, mobNumber, password));
     }
@@ -100,8 +101,8 @@ public class AttendanceFunctionalities extends Base {
     @Epic("This story represents the Attendance module of the onelern_school project.")
     @Description("Examine whether or not the teacher can navigate to next pages through pagination.")
     @Story("ATTFT_04")
-    @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "teacherdata")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(dataProvider = "teacherData")
     public void teacherPaginationCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(attmethods.teacherPaginationCheck(driver, mobNumber, password));
     }
@@ -114,24 +115,17 @@ public class AttendanceFunctionalities extends Base {
         driver.quit();
     }
 
-    @DataProvider(name = "studentdata")
-    public Object[][] getstudentData() {
-//        Object loginData[][] = { { "9000000001", "123456" }, { "9000000021", "123456" }, { "9000000041", "123456" },
-//                { "9000000061", "123456" }, { "9000000081", "123456" } };
-        Object loginData[][] = { { "9000000001", "123456" }};
-//        Object[][] loginData = ReadExcelFile.TestcasesCredentials("student");
-        for(Object[] i:loginData){
-            System.out.println(Arrays.toString(i));
-        }
-        return loginData;
+    @DataProvider(name = "studentData")
+    public Object[][] getstudentData() throws FileAlreadyExistsException {
+//		Object loginData[][] = { { "9000000001", "123456" } };
+//        return loginData;
+        return getStudentData();
     }
-    @DataProvider(name = "teacherdata")
-    public Object[][] getteacherData() {
-//        Object loginData[][] = { { "9000000101", "123456" }, { "9000000105", "123456" }, { "9000000110", "123456" },
-//                { "9000000114", "123456" }, { "9000000120", "123456" } };
-        Object loginData[][] = { { "9000000101", "123456" }};
-//        Object[][] loginData = ReadExcelFile.TestcasesCredentials("teacher");
 
-        return loginData;
+    @DataProvider(name = "teacherData")
+    public Object[][] getteacherData() throws FileAlreadyExistsException {
+//        Object loginData[][] = {{"9000000101", "123456"}};
+//        return loginData;
+        return getTeacherData();
     }
 }

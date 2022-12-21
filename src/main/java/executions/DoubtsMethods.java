@@ -78,16 +78,16 @@ public class DoubtsMethods extends BaseLogin {
         }
     }
     public boolean studentAskADoubt(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         this.dou = new Doubts(driver);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(dou.DoubtsToggle()));
+        Thread.sleep(2000);
         dou.DoubtsToggle().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.AskDoubtBtn()));
+        Thread.sleep(2000);
 
         dou.AskDoubtBtn().click();
-
+        Thread.sleep(5000);
         String actual_header = dou.AskDoubtHeader().getText();
         return AskButtonValidateTest(actual_header);
     }
@@ -109,15 +109,15 @@ public class DoubtsMethods extends BaseLogin {
         this.dou = new Doubts(driver);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(dou.DoubtsToggle()));
+        Thread.sleep(2000);
         dou.DoubtsToggle().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.DoubtsCards().get(0)));
+        Thread.sleep(2000);
         int numberOfDoubts = dou.DoubtsCards().size();
         if(numberOfDoubts > 0){
             int prevCount = Integer.parseInt(dou.ViewCount().getText());
             dou.FirstDoubt().click();
-            wait.until(ExpectedConditions.elementToBeClickable(dou.ViewCount()));
             Thread.sleep(2000);
+
             int currCount = Integer.parseInt(dou.ViewCount().getText());
 
             return ViewCountValidateTest(currCount, prevCount+1);
@@ -132,15 +132,15 @@ public class DoubtsMethods extends BaseLogin {
         this.dou = new Doubts(driver);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(dou.DoubtsToggle()));
+        Thread.sleep(2000);
         dou.DoubtsToggle().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.DoubtsCards().get(0)));
+        Thread.sleep(2000);
         int numberOfDoubts = dou.DoubtsCards().size();
         if(numberOfDoubts > 0){
             int prevCount = Integer.parseInt(dou.ViewCount().getText());
             dou.FirstDoubt().click();
-            wait.until(ExpectedConditions.elementToBeClickable(dou.ViewCount()));
             Thread.sleep(2000);
+
             int currCount = Integer.parseInt(dou.ViewCount().getText());
 
             return ViewCountValidateTest(currCount, prevCount+1);
@@ -176,21 +176,21 @@ public class DoubtsMethods extends BaseLogin {
         Long mob = Long.parseLong(mobNumber);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(dou.DoubtsToggle()));
+        Thread.sleep(2000);
         dou.DoubtsToggle().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.AskDoubtBtn()));
+        Thread.sleep(2000);
 
         dou.AskDoubtBtn().click();
-
+        Thread.sleep(2000);
 
         String selectedSubject = null, selectedLesson = null;
         List<WebElement> doubtoptions = driver.findElements(By.xpath("/html/body/div[4]/div[1]/div/div[1]//select"));
 
         for(WebElement webElement:doubtoptions){
             webElement.click();
-            Thread.sleep(2000);
             webElement.sendKeys(Keys.ARROW_DOWN);
             webElement.sendKeys(Keys.ENTER);
+            Thread.sleep(2000);
         }
         int i=0;
         for(WebElement webElement:doubtoptions){
@@ -198,7 +198,7 @@ public class DoubtsMethods extends BaseLogin {
             if(i==0){
                 selectedSubject = select.getFirstSelectedOption().getText();
             }
-            else{
+            else if(i==1){
                 selectedLesson = select.getFirstSelectedOption().getText();
             }
             i++;
@@ -210,7 +210,6 @@ public class DoubtsMethods extends BaseLogin {
             dou.QuestionTextBox().sendKeys(doubtContentMap.get("Grade 1"));
             dou.SubmitBtn().click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(dou.CreatedSubjectDetails()));
             Thread.sleep(5000);
             // verify created doubt content
             String CreatedSubjectDetails = dou.CreatedSubjectDetails().getText();
@@ -224,7 +223,7 @@ public class DoubtsMethods extends BaseLogin {
             dou.QuestionTextBox().sendKeys(doubtContentMap.get("Grade 2"));
             dou.SubmitBtn().click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(dou.CreatedSubjectDetails()));
+            Thread.sleep(5000);
             // verify created doubt content
             String CreatedSubjectDetails = dou.CreatedSubjectDetails().getText();
             String CreatedQuestionDetails = dou.CreatedQuestionDetails().getText();
@@ -238,7 +237,7 @@ public class DoubtsMethods extends BaseLogin {
             dou.QuestionTextBox().sendKeys(doubtContentMap.get("Grade 3"));
             dou.SubmitBtn().click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(dou.CreatedSubjectDetails()));
+            Thread.sleep(5000);
             // verify created doubt content
             String CreatedSubjectDetails = dou.CreatedSubjectDetails().getText();
             String CreatedQuestionDetails = dou.CreatedQuestionDetails().getText();
@@ -251,7 +250,7 @@ public class DoubtsMethods extends BaseLogin {
             dou.QuestionTextBox().sendKeys(doubtContentMap.get("Grade 4"));
             dou.SubmitBtn().click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(dou.CreatedSubjectDetails()));
+            Thread.sleep(5000);
             // verify created doubt content
             String CreatedSubjectDetails = dou.CreatedSubjectDetails().getText();
             String CreatedQuestionDetails = dou.CreatedQuestionDetails().getText();
@@ -264,7 +263,7 @@ public class DoubtsMethods extends BaseLogin {
             dou.QuestionTextBox().sendKeys(doubtContentMap.get("Grade 5"));
             dou.SubmitBtn().click();
 
-            wait.until(ExpectedConditions.elementToBeClickable(dou.CreatedSubjectDetails()));
+            Thread.sleep(5000);
             // verify created doubt content
             String CreatedSubjectDetails = dou.CreatedSubjectDetails().getText();
             String CreatedQuestionDetails = dou.CreatedQuestionDetails().getText();
@@ -272,8 +271,6 @@ public class DoubtsMethods extends BaseLogin {
             return StudentAskDoubtValidateTest(CreatedSubjectDetails, selectedSubject, selectedLesson, CreatedQuestionDetails, doubtContentMap.get("Grade 5"));
         }
         return false;
-
-
     }
 
     public boolean TeacherViewDoubtValidateTest(String subjectDetails, String SubjectfromStudent, String contentDetails, String contentfromStudent) {
@@ -407,21 +404,21 @@ Thread.sleep(2000);
     }
 
     public boolean studentFilterFunctionalityCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         boolean flag1 = false, flag2 = false, flag3 = false;
         int no_of_doubts;
         String selectedFilterSubject;
-
-        this.dou = new Doubts(driver);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(dou.DoubtsToggle()));
+        Thread.sleep(2000);
         dou.DoubtsToggle().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.FilterSubjectFirstSubject_Student()));
+        Thread.sleep(2000);
+
+//        dou.FilterSubjectSelectAll_Student().click();
+        Thread.sleep(2000);
 
         dou.FilterSubjectFirstSubject_Student().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.FilterSubjectFirstSubject_Student()));
-Thread.sleep(2000);
+        Thread.sleep(2000);
+
         selectedFilterSubject = dou.FilterSubjectFirstSubject_Student().getText();
         no_of_doubts = dou.displayedDoubtSubjectDetails().size();
         for(int i=1; i<=no_of_doubts;i++){
@@ -432,11 +429,11 @@ Thread.sleep(2000);
             }
         }
         dou.FilterSubjectFirstSubject_Student().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.FilterSubjectSecondSubject_Student()));
+        Thread.sleep(2000);
 
         dou.FilterSubjectSecondSubject_Student().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.FilterSubjectSecondSubject_Student()));
         Thread.sleep(2000);
+
         selectedFilterSubject = dou.FilterSubjectSecondSubject_Student().getText();
         no_of_doubts = dou.displayedDoubtSubjectDetails().size();
         for(int i=1; i<=no_of_doubts;i++){
@@ -447,21 +444,30 @@ Thread.sleep(2000);
             }
         }
         dou.FilterSubjectSecondSubject_Student().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.FilterSubjectThirdSubject_Student()));
+        Thread.sleep(2000);
 
         dou.FilterSubjectThirdSubject_Student().click();
-        wait.until(ExpectedConditions.elementToBeClickable(dou.FilterSubjectThirdSubject_Student()));
         Thread.sleep(2000);
+
         selectedFilterSubject = dou.FilterSubjectThirdSubject_Student().getText();
         no_of_doubts = dou.displayedDoubtSubjectDetails().size();
         for(int i=1; i<=no_of_doubts;i++){
             WebElement webElement = driver.findElement(By.xpath("//div[contains(@class, 'doubts-card')]["+i+"]//div[contains(@class, 'subject-details')]"));
-            flag3 = textCheck(webElement.getText(), selectedFilterSubject);
-            if(!flag3){
-                break;
+            if(webElement.getText().contains("Environmental") || webElement.getText().contains("EVS")){
+                flag3 = textCheck(webElement.getText(), selectedFilterSubject) || textCheck(webElement.getText(), "EVS");
+                if(!flag3){
+                    break;
+                }
+            }
+            else{
+                flag3 = textCheck(webElement.getText(), selectedFilterSubject);
+                if(!flag3){
+                    break;
+                }
             }
         }
         dou.FilterSubjectThirdSubject_Student().click();
+        Thread.sleep(2000);
 
         return FilterFunctionalityValidateTest(flag1, flag2, flag3);
     }
@@ -470,17 +476,19 @@ Thread.sleep(2000);
         boolean flag1 = false, flag2 = false, flag3 = false;
         int no_of_doubts;
         String selectedFilterSubject;
-
-        this.dou = new Doubts(driver);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
         Thread.sleep(2000);
         dou.DoubtsToggle().click();
         Thread.sleep(2000);
 
+
         dou.FilterSubjectFirstSubject_Teacher().click();
+        Thread.sleep(1000);
         dou.FilterSubjectSecondSubject_Teacher().click();
+        Thread.sleep(1000);
         dou.FilterSubjectThirdSubject_Teacher().click();
+        Thread.sleep(1000);
 
         dou.FilterSubjectFirstSubject_Teacher().click();
         Thread.sleep(5000);
@@ -502,8 +510,8 @@ Thread.sleep(2000);
         Thread.sleep(2000);
 
 
-        dou.FilterSubjectSecondSubject_Teacher().click();
-        Thread.sleep(5000);
+//        dou.FilterSubjectSecondSubject_Teacher().click();
+//        Thread.sleep(5000);
 
         selectedFilterSubject = dou.FilterSubjectSecondSubject_Teacher().getText();
         no_of_doubts = dou.displayedDoubtSubjectDetails().size();
@@ -511,6 +519,7 @@ Thread.sleep(2000);
             WebElement webElement = driver.findElement(By.xpath("//div[contains(@class, 'doubts-card')]["+i+"]//div[contains(@class, 'subject-details')]"));
             flag2 = textCheck(webElement.getText(), selectedFilterSubject);
             if(!flag2){
+                System.out.println(webElement.getText()+" "+selectedFilterSubject);
                 break;
             }
         }
@@ -522,8 +531,8 @@ Thread.sleep(2000);
         Thread.sleep(2000);
 
 
-        dou.FilterSubjectThirdSubject_Teacher().click();
-        Thread.sleep(5000);
+//        dou.FilterSubjectThirdSubject_Teacher().click();
+//        Thread.sleep(5000);
 
         selectedFilterSubject = dou.FilterSubjectThirdSubject_Teacher().getText();
         no_of_doubts = dou.displayedDoubtSubjectDetails().size();
@@ -531,6 +540,7 @@ Thread.sleep(2000);
             WebElement webElement = driver.findElement(By.xpath("//div[contains(@class, 'doubts-card')]["+i+"]//div[contains(@class, 'subject-details')]"));
             flag3 = textCheck(webElement.getText(), selectedFilterSubject);
             if(!flag3){
+                System.out.println(webElement.getText()+" "+selectedFilterSubject);
                 break;
             }
         }
@@ -578,11 +588,11 @@ Thread.sleep(2000);
 
         // ask doubt
         dou.AskDoubtBtn().click();
-        Thread.sleep(5000);
+        Thread.sleep(2000);
 
         String selectedSubject = null, selectedLesson = null;
         List<WebElement> doubtoptions = driver.findElements(By.xpath("/html/body/div[4]/div[1]/div/div[1]//select"));
-
+        Thread.sleep(2000);
         for(WebElement webElement:doubtoptions){
             webElement.click();
             webElement.sendKeys(Keys.ARROW_DOWN);
@@ -595,7 +605,7 @@ Thread.sleep(2000);
             if(i==0){
                 selectedSubject = select.getFirstSelectedOption().getText();
             }
-            else if(i==1){
+            else if(i==2){
                 selectedLesson = select.getFirstSelectedOption().getText();
             }
             i++;
@@ -603,14 +613,13 @@ Thread.sleep(2000);
         }
         dou.QuestionTextBox().click();
         dou.QuestionTextBox().sendKeys("ABCD TEST");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         dou.SubmitBtn().click();
-
         Thread.sleep(5000);
 
         // -------------------------
 
-        driver.navigate().to("https://test.onelern.school/");
+        driver.navigate().to(prop.getProperty("website"));
         dou.HomepageMenuBtn().click();
         logoutelement = dou.logoutBtn();
         js.executeScript("arguments[0].scrollIntoView();", logoutelement);
@@ -642,7 +651,7 @@ Thread.sleep(2000);
         // validate answered count- curr == prev+1
         flag1 = CompareVal(CurrAnsweredCount, prevAnsweredCount + 1);
 
-        driver.navigate().to("https://test.onelern.school/");
+        driver.navigate().to(prop.getProperty("website"));
         dou.HomepageMenuBtn().click();
         logoutelement = dou.logoutBtn();
         js.executeScript("arguments[0].scrollIntoView();", logoutelement);
@@ -653,8 +662,6 @@ Thread.sleep(2000);
         dou.backBtnLoginPage().click();
 
         user.userLogin("student", Student_mobile_number, password);
-        Thread.sleep(2000);
-        dou.StudentImageClick().click();
         Thread.sleep(2000);
         dou.DoubtsToggle().click();
         Thread.sleep(2000);
@@ -680,7 +687,7 @@ Thread.sleep(2000);
         flag5 = CompareVal(ResolvedTextCount, 2);
 
         // checking resolved text in teacher account
-        driver.navigate().to("https://test.onelern.school/");
+        driver.navigate().to(prop.getProperty("website"));
         dou.HomepageMenuBtn().click();
         logoutelement = dou.logoutBtn();
         js.executeScript("arguments[0].scrollIntoView();", logoutelement);

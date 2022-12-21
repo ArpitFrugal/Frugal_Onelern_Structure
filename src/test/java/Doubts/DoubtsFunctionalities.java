@@ -13,6 +13,7 @@ import resources.Base;
 import testResource.ReadExcelFile;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.Arrays;
 
 public class DoubtsFunctionalities extends Base {
@@ -35,7 +36,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the student can successfully get inside the Doubts module.")
     @Story("DOUFS_01")
     @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "studentdata", priority = 1)
+    @Test(dataProvider = "studentData", priority = 1)
     public void studentLanding(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.studentLanding(driver, mobNumber, password));
     }
@@ -43,7 +44,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the teacher can successfully get inside the Doubts module.")
     @Story("DOUFT-01")
     @Severity(SeverityLevel.BLOCKER)
-    @Test(dataProvider = "teacherdata", priority = 2)
+    @Test(dataProvider = "teacherData", priority = 2)
     public void teacherLanding(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.teacherLanding(driver, mobNumber, password));
     }
@@ -52,7 +53,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the student can successfully open page for asking doubt.")
     @Story("DOUFS_02")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(dataProvider = "studentdata", priority = 3)
+    @Test(dataProvider = "studentData", priority = 3)
     public void studentAskADoubt(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.studentAskADoubt(driver, mobNumber, password));
     }
@@ -61,7 +62,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the student can successfully view the increase in view count when viewed.")
     @Story("DOUFS_03")
     @Severity(SeverityLevel.MINOR)
-    @Test(dataProvider = "studentdata", priority = 4)
+    @Test(dataProvider = "studentData", priority = 4)
     public void studentViewCountCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.studentViewCountCheck(driver, mobNumber, password));
     }
@@ -70,7 +71,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the teacher can successfully view the increase in view count when viewed.")
     @Story("DOUFT-02")
     @Severity(SeverityLevel.MINOR)
-    @Test(dataProvider = "teacherdata", priority = 5)
+    @Test(dataProvider = "teacherData", priority = 5)
     public void teacherViewCountCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.teacherViewCountCheck(driver ,mobNumber, password));
     }
@@ -79,7 +80,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the student can successfully ask his/her doubt.")
     @Story("DOUFS_04")
     @Severity(SeverityLevel.NORMAL)
-    @Test(dataProvider = "studentdata", priority = 6)
+    @Test(dataProvider = "studentData", priority = 6)
     public void studentAskNewDoubt(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.studentAskNewDoubt(driver, mobNumber, password));
     }
@@ -88,7 +89,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the teacher can successfully view the doubt asked by the students.")
     @Story("DOUFT-03")
     @Severity(SeverityLevel.NORMAL)
-    @Test(dataProvider = "teacherdata", priority = 7)
+    @Test(dataProvider = "teacherData", priority = 7)
     public void teacherViewNewDoubt(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.teacherViewNewDoubt(driver, mobNumber, password));
     }
@@ -97,7 +98,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the student can successfully upload multimedia content in his/her doubt.")
     @Story("DOUFS_05")
     @Severity(SeverityLevel.NORMAL)
-    @Test(dataProvider = "studentdata", priority = 8)
+    @Test(dataProvider = "studentData", priority = 8)
     public void studentUploadMultimedia(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.studentUploadMultimedia(driver, mobNumber, password));
     }
@@ -106,7 +107,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the student can successfully filter the content by applying specific filters.")
     @Story("DOUFS_06")
     @Severity(SeverityLevel.NORMAL)
-    @Test(dataProvider = "studentdata", priority = 9)
+    @Test(dataProvider = "studentData", priority = 9)
     public void studentFilterFunctionalityCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.studentFilterFunctionalityCheck(driver, mobNumber, password));
     }
@@ -115,7 +116,7 @@ public class DoubtsFunctionalities extends Base {
     @Description("Examine whether or not the teacher can successfully filter the content by applying specific filters.")
     @Story("DOUFT-04")
     @Severity(SeverityLevel.NORMAL)
-    @Test(dataProvider = "teacherdata", priority = 10)
+    @Test(dataProvider = "teacherData", priority = 10)
     public void teacherFilterFunctionalityCheck(String mobNumber, String password) throws IOException, InterruptedException {
         Assert.assertTrue(doumethods.teacherFilterFunctionalityCheck(driver, mobNumber, password));
     }
@@ -136,25 +137,18 @@ public class DoubtsFunctionalities extends Base {
         driver.quit();
     }
 
-    @DataProvider(name = "studentdata")
-    public Object[][] getstudentData() {
-//        Object loginData[][] = { { "9000000001", "123456" }, { "9000000021", "123456" }, { "9000000041", "123456" },
-//                { "9000000061", "123456" }, { "9000000081", "123456" } };
-        Object loginData[][] = { { "9000000001", "123456" }};
-//        Object[][] loginData = ReadExcelFile.TestcasesCredentials("student");
-        for(Object[] i:loginData){
-            System.out.println(Arrays.toString(i));
-        }
-        return loginData;
+    @DataProvider(name = "studentData")
+    public Object[][] getstudentData() throws FileAlreadyExistsException {
+//		Object loginData[][] = { { "9000000001", "123456" } };
+//        return loginData;
+        return getStudentData();
     }
-    @DataProvider(name = "teacherdata")
-    public Object[][] getteacherData() {
-//        Object loginData[][] = { { "9000000101", "123456" }, { "9000000105", "123456" }, { "9000000110", "123456" },
-//                { "9000000114", "123456" }, { "9000000120", "123456" } };
-        Object loginData[][] = { { "9000000101", "123456" }};
-//        Object[][] loginData = ReadExcelFile.TestcasesCredentials("teacher");
 
-        return loginData;
+    @DataProvider(name = "teacherData")
+    public Object[][] getteacherData() throws FileAlreadyExistsException {
+//        Object loginData[][] = {{"9000000101", "123456"}};
+//        return loginData;
+        return getTeacherData();
     }
 
 

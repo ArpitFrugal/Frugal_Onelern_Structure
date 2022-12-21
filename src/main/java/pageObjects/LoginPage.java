@@ -1,9 +1,10 @@
 package pageObjects;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-public class LoginPage {
+import org.openqa.selenium.*;
+import resources.Base;
+
+public class LoginPage extends Base {
     public WebDriver driver;
     By studentSignIn = By.id("student");
     By teacherSignIn = By.id("teacher");
@@ -15,7 +16,22 @@ public class LoginPage {
     By okText = By.id("ok-btn");
     By UserName = By.id("mobile-number");
 
+    // Admin
+    By userEmailID = By.id("userid");
+    By PasswordInput = By.id("password");
+    By adminLoginBtn = By.id("login-btn");
+
+    By ContactUsBtn = By.id("contact-us-2");
+    By ContactUsModalHeader = By.xpath("//*[contains(@class, 'modal-box')]//h1");
+
+
+
     By StudentImageClick = By.xpath("//div[@class='d-flex justify-content-center align-items-center flex-column']//div[2]//button[1]//img[1]");
+    @Attachment(value = "Screenshot", type = "image/png")
+    public byte[] screenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
 
     // constructor
     public LoginPage(WebDriver driver2) {
@@ -25,11 +41,13 @@ public class LoginPage {
     // Get Student login page access
     @Step("Selected log in as Student...")
     public WebElement getStudentSignIn() {
+        screenshot();
         return driver.findElement(studentSignIn);
     }
     // Get Teacher login page access
     @Step("Selected log in as Teacher...")
     public WebElement getTeacherSignIn() {
+        screenshot();
         return driver.findElement(teacherSignIn);
     }
     // Get Student Others page access
@@ -39,22 +57,36 @@ public class LoginPage {
     // Get username block access
     @Step("Mobile number is entered...")
     public WebElement getUserName() {
+        screenshot();
         return driver.findElement(UserName);
     }
     // Get password block access
     @Step("password is entered...")
     public WebElement getPassword() {
+        screenshot();
         return driver.findElement(password);
     }
     // Get Submit button
     @Step("Mobile number is submitted...")
     public WebElement getSubmitButton() {
+        screenshot();
         return driver.findElement(submitButton);
     }
     //Get Password Submit Button
     @Step("Password is submitted...")
     public WebElement getPasswordButton() {
+        screenshot();
         return driver.findElement(PasswordSubmit);
+    }
+    @Step("Clicked on Contact us...")
+    public WebElement ContactUsBtn() {
+        screenshot();
+        return driver.findElement(ContactUsBtn);
+    }
+    @Step("Fetching heading on Contact us modal box...")
+    public WebElement ContactUsModalHeader() {
+        screenshot();
+        return driver.findElement(ContactUsModalHeader);
     }
     // Get login with password text
     public WebElement getloginWithPassword() {
@@ -64,8 +96,17 @@ public class LoginPage {
     public WebElement okText() {
         return driver.findElement(okText);
     }
+
+
+    // Admin
+    @Step("Entering user email Id...")
+    public WebElement userEmailID(){return driver.findElement(userEmailID);}
+    @Step("Entering password...")
+    public WebElement PasswordInput(){return driver.findElement(PasswordInput);}
+    public WebElement adminLoginBtn(){return driver.findElement(adminLoginBtn);}
     @Step("Student account is selected...")
     public WebElement StudentImageClick() {
         return driver.findElement(StudentImageClick);
     }
+
 }

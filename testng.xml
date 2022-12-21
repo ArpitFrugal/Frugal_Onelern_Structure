@@ -4,8 +4,40 @@
 <listeners>
 	<listener class-name="testResource.Listners"/>
 </listeners>
-	<test thread-count="5" name="Test">
+	<test name="Test">
 		<classes>
+			<!--			Notifications-->
+
+
+			<!--			Parent-->
+
+
+
+			<!--			User Management-->
+
+
+
+			<!--			Time Table-->
+			<class name="TimeTable.TimeTableFunctionalities"/>
+
+			<!--			Analytics-->
+			<class name="Analytics.AnalyticsFunctionalities"/>
+
+			<!--			Lesson Delivery-->
+			<class name="LessonDelivery.LessonDeliveryFunctionalities"/>
+
+			<!--			Assignments-->
+			<class name="Assignments.AssignmentsFunctionalities"/>
+
+			<!--			Student Groups-->
+			<class name="StudentGroups.StudentGroupsFunctionalities"/>
+
+			<!--			Assessments-->
+			<class name="Assessments.AssessmentsFunctionalities"/>
+
+			<!--			Attendance-->
+			<class name="Attendance.AttendanceFunctionalities"/>
+
 			<!--			Doubts-->
 			<class name="Doubts.DoubtsFunctionalities"/>
 
@@ -21,6 +53,7 @@
 			<!--			Login-->
 			<class name="loginFunctionality.LoginLandingPageCheck" />
 			<class name="loginFunctionality.UserSignInFunctionality" />
+
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

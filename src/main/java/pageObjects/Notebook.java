@@ -1,21 +1,22 @@
 package pageObjects;
 
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import resources.Base;
 
+import java.io.IOException;
 import java.util.List;
 
-public class Notebook {
+public class Notebook extends Base {
     public WebDriver driver;
 
     By StudentImageClick = By.xpath("//div[@class='d-flex justify-content-center align-items-center flex-column']//div[2]//button[1]//img[1]");
-    //    By TeacherNotebookToggle = By.xpath("//img[@src='/images/notebook.svg']");
+//    By TeacherNotebookToggle = By.xpath("//img[@src='/images/notebook.svg']");
     By StudentNotebookToggle = By.xpath("//img[@src='/images/notebook-white.svg']");
-    //    By BackButton = By.xpath("//header/div[1]/div[1]/button[1]/img[1]");
+//    By BackButton = By.xpath("//header/div[1]/div[1]/button[1]/img[1]");
     By NotebookToggle = By.id("notebook");
-    //    By BackButton = By.id("inner_header_back_btn");
+//    By BackButton = By.id("inner_header_back_btn");
     By BackButton = By.xpath("//*[contains(@class,'back-btn')]");
 
     //landing page
@@ -23,7 +24,7 @@ public class Notebook {
 
 
     // Grade check
-    By CoursebooksGradeTextGrade = By.className("svelte-uh84k1");
+    By CoursebooksGradeTextGrade = By.xpath("//*[contains(@class,'book ')]//div[contains(@class,'form-details')]");
 
     // lesson name verify
     By EnvironmentalCoursebookGrade1 = By.xpath("//*[@id='61606a629e1fe601b5ee768c']/img");
@@ -44,7 +45,7 @@ public class Notebook {
     By SecondLessonText = By.xpath("//*[@id='item_2']/div/div[2]");
     By ThirdLessonText = By.xpath("//*[@id='item_3']/div/div[2]");
     By LessonHeading = By.xpath("/html/body/div[3]/div/div[2]/div/h1");
-    //    By LessonHeading = By.id();
+//    By LessonHeading = By.id();
     // highlights
     By LibraryToggle = By.id("library");
     By FirstTopic = By.id("section_1");
@@ -59,18 +60,25 @@ public class Notebook {
 
     By greenBtn = By.xpath("//label[@for='green']");
     By notesBtn = By.xpath("//*[@class='radio-item notes']");
-    //    By notesBtn = By.className("radio-item notes");
+//    By notesBtn = By.className("radio-item notes");
     By notesTextarea = By.id("annotator-field-0");
     By saveNoteBtn = By.xpath("//a[@href='#save']");
     By bookmarkBtn = By.xpath("//*[@class='radio-item bookmark']");
-    //    By bookmarkBtn = By.className("radio-item bookmark");
+//    By bookmarkBtn = By.className("radio-item bookmark");
     By deleteBtn = By.xpath("//div[contains(@class,'radio-item deleteannotation')]");
     By random_text_to_click = By.xpath("//p[contains(@class,'svelte')]");
-    By TeacherSearchIcon = By.xpath("//img[@class='pointer']");
+
+    By oldSearchIcon = By.xpath("//img[@class='pointer']");
     By SearchIcon = By.id("search_icon");
     By SearchInput = By.id("search_box");
     By contents = By.xpath("//*[contains(@class,'bookmark student-state ')]");
 
+
+
+    @Attachment(value = "Screenshot", type = "image/png")
+    public byte[] screenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
 
     public Notebook(WebDriver driver2) {
         this.driver = driver2;
@@ -78,53 +86,76 @@ public class Notebook {
 
     // highlights
     @Step("Library module is opened...")
-    public WebElement LibraryToggle() { return driver.findElement(LibraryToggle); }
+    public WebElement LibraryToggle(){
+        screenshot();
+        return driver.findElement(LibraryToggle);
+    }
+    @Step("Notebook Module is opened...")
+    public WebElement NotebookToggle() throws IOException {
+        screenshot();
+        return driver.findElement(NotebookToggle);
+    }
+
     public WebElement FirstTopic(){return driver.findElement(FirstTopic);}
     public WebElement SecondTopic(){return driver.findElement(SecondTopic);}
-    public WebElement ThirdTopic(){return driver.findElement(ThirdTopic);}
 
+    public WebElement ThirdTopic(){return driver.findElement(ThirdTopic);}
     public WebElement EnvFirstLessonFirstTopicRefGrade1(){return driver.findElement(EnvFirstLessonFirstTopicRefGrade1);}
     public WebElement EngThirdLessonFirstTopicRefGrade2(){return driver.findElement(EngThirdLessonFirstTopicRefGrade2);}
     public WebElement MathFirstLessonFirstTopicRefGrade3(){return driver.findElement(MathFirstLessonFirstTopicRefGrade3);}
     public WebElement EngFirstLessonFirstTopicRefGrade4(){return driver.findElement(EngFirstLessonFirstTopicRefGrade4);}
-    public WebElement MathFirstLessonFirstTopicRefGrade5(){return driver.findElement(MathFirstLessonFirstTopicRefGrade5);}
 
+    public WebElement MathFirstLessonFirstTopicRefGrade5(){return driver.findElement(MathFirstLessonFirstTopicRefGrade5);}
     @Step("Text is highlighted in green color...")
-    public WebElement greenBtn(){return driver.findElement(greenBtn);}
+    public WebElement greenBtn(){
+        screenshot();
+        return driver.findElement(greenBtn);
+    }
     public WebElement notesBtn(){return driver.findElement(notesBtn);}
     public WebElement notesTextarea(){return driver.findElement(notesTextarea);}
     public WebElement saveNoteBtn(){return driver.findElement(saveNoteBtn);}
     public WebElement bookmarkBtn(){return driver.findElement(bookmarkBtn);}
     @Step("removed highlight for highlighted text...")
-    public WebElement deleteBtn(){return driver.findElement(deleteBtn);}
+    public WebElement deleteBtn(){
+        screenshot();
+        return driver.findElement(deleteBtn);
+    }
+
     public WebElement random_text_to_click(){return driver.findElement(random_text_to_click);}
 
-
-    public WebElement TeacherSearchIcon(){return driver.findElement(TeacherSearchIcon);}
+    public WebElement oldSearchIcon(){return driver.findElement(oldSearchIcon);}
     public WebElement SearchIcon(){return driver.findElement(SearchIcon);}
     @Step("Searching text...")
-    public WebElement SearchInput(){return driver.findElement(SearchInput);}
-    public List<WebElement> contents(){return driver.findElements(contents);}
+    public WebElement SearchInput(){
+        screenshot();
+        return driver.findElement(SearchInput);
+    }
 
+    public List<WebElement> contents(){return driver.findElements(contents);}
 
 
 
     @Step("Student account is selected...")
     public WebElement StudentImageClick() {
+        screenshot();
         return driver.findElement(StudentImageClick);
     }
     //    public WebElement TeacherNotebookToggle() {
-//        return driver.findElement(TeacherNotebookToggle);
-//    }
+    //        return driver.findElement(TeacherNotebookToggle);
+    //    }
     public WebElement StudentNotebookToggle() {return driver.findElement(StudentNotebookToggle);}
-    @Step("Notebook Module is opened...")
-    public WebElement NotebookToggle() { return driver.findElement(NotebookToggle);}
     @Step("Back button is clicked...")
-    public WebElement BackButton() { return driver.findElement(BackButton);}
+    public WebElement BackButton() {
+        screenshot();
+        return driver.findElement(BackButton);
+    }
 
     // landing page
     @Step("Fetching heading...")
-    public String GetHeader(){return driver.findElement(GetHeader).getText();}
+    public String GetHeader(){
+        screenshot();
+        return driver.findElement(GetHeader).getText();
+    }
 
 
     // Grade Check
@@ -138,14 +169,23 @@ public class Notebook {
 
 
     // lesson name verify
+    @Step("Opening Environmental coursebook...")
     public WebElement EnvironmentalCoursebookGrade1(){return driver.findElement(EnvironmentalCoursebookGrade1);}
+    @Step("Opening Mathematics coursebook...")
     public WebElement MathematicsCoursebookGrade2(){return driver.findElement(MathematicsCoursebookGrade2);}
+    @Step("Opening Social Studies coursebook...")
     public WebElement SocialStudiesCoursebookGrade3(){return driver.findElement(SocialStudiesCoursebookGrade3);}
+    @Step("Opening Science coursebook...")
     public WebElement ScienceCoursebookGrade4(){return driver.findElement(ScienceCoursebookGrade4);}
+    @Step("Opening Social Studies coursebook...")
     public WebElement SocialStudiesCoursebookGrade5(){return driver.findElement(SocialStudiesCoursebookGrade5);}
+    @Step("Opening English coursebook...")
     public WebElement EnglishCoursebookGrade2(){return driver.findElement(EnglishCoursebookGrade2);}
+    @Step("Opening Mathematics coursebook...")
     public WebElement MathematicsCoursebookGrade3(){return driver.findElement(MathematicsCoursebookGrade3);}
+    @Step("Opening English coursebook...")
     public WebElement EnglishCoursebookGrade4(){return driver.findElement(EnglishCoursebookGrade4);}
+    @Step("Opening Mathematics coursebook...")
     public WebElement MathematicsCoursebookGrade5(){return driver.findElement(MathematicsCoursebookGrade5);}
 
     public WebElement FirstLesson(){return driver.findElement(FirstLesson);}
@@ -155,6 +195,9 @@ public class Notebook {
     public String SecondLessonText(){return driver.findElement(SecondLessonText).getText();}
     public String ThirdLessonText(){return driver.findElement(ThirdLessonText).getText();}
     @Step("Fetching lesson heading...")
-    public String LessonHeading(){return driver.findElement(LessonHeading).getText().substring(2);}
+    public String LessonHeading(){
+        screenshot();
+        return driver.findElement(LessonHeading).getText().substring(2);
+    }
 
 }

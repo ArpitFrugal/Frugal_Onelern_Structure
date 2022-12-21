@@ -104,6 +104,7 @@ public class AttendanceMethods extends BaseLogin {
         flag3 = valCompare(leaveCount, daysleave);
         flag4 = valCompare(holidayCount, daysholiday);
 
+        System.out.println(flag1+" "+flag2+" "+flag3+" "+flag4);
 
         return AttendancePALHValidateTest(flag1 && flag2 && flag3 && flag4);
     }
@@ -117,48 +118,55 @@ public class AttendanceMethods extends BaseLogin {
         Thread.sleep(2000);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-
-        boolean markedForToday = att.notMarkedTeacher().size() >0;
-        if(!markedForToday){
-            driver.findElement(By.xpath("//*[contains(@class,'active')]")).click();
-            Thread.sleep(2000);
-            int totalcount = Integer.parseInt(att.totalCountTeacher().getText().split(" ")[2]);
-            int presentcount = Integer.parseInt(att.presentCountTeacher().getText().split(" ")[1]);
-            int absentcount = Integer.parseInt(att.absentCountTeacher().getText().split(" ")[1]);
-            int leavecount = Integer.parseInt(att.leaveCountTeacher().getText().split(" ")[1]);
-            System.out.println(totalcount+" "+presentcount+" "+absentcount+" "+leavecount);
-            return AttendancePALHValidateTest(totalcount == presentcount+absentcount+leavecount);
-
+        if(!att.editAttendanceBtn().isEnabled()){
+            AttendancePALHValidateTest(true);
         }
-        else{
-            att.editAttendanceBtn().click();
-            driver.findElement(By.xpath("//*[contains(@class,'present-mark-box')]")).click();
-            WebElement element = att.attendancemarkoption();
-            js.executeScript("arguments[0].scrollIntoView();", element);
-            element.click();
+        else {
+            boolean markedForToday = att.notMarkedTeacher().size() >0;
+            if(!markedForToday){
+                driver.findElement(By.xpath("//*[contains(@class,'active')]")).click();
+                Thread.sleep(2000);
+                int totalcount = Integer.parseInt(att.totalCountTeacher().getText().split(" ")[2]);
+                int presentcount = Integer.parseInt(att.presentCountTeacher().getText().split(" ")[1]);
+                int absentcount = Integer.parseInt(att.absentCountTeacher().getText().split(" ")[1]);
+                int leavecount = Integer.parseInt(att.leaveCountTeacher().getText().split(" ")[1]);
 
-            Thread.sleep(2000);
-            att.absentmarkoption().click();
-            Thread.sleep(2000);
+                System.out.println(totalcount +" "+presentcount+" "+absentcount+" "+leavecount);
+                AttendancePALHValidateTest(totalcount == presentcount+absentcount+leavecount);
 
-            att.attendancemarkoption().click();
-            Thread.sleep(2000);
-            att.leavemarkoption().click();
-            Thread.sleep(2000);
+            }
+            else{
+                att.editAttendanceBtn().click();
+                driver.findElement(By.xpath("//*[contains(@class,'present-mark-box')]")).click();
+                WebElement element = att.attendancemarkoption();
+                js.executeScript("arguments[0].scrollIntoView();", element);
 
-            att.saveBtn().click();
-            Thread.sleep(2000);
-            driver.findElement(By.xpath("//*[contains(@class,'active')]/*[contains(@class,'week-day')]")).click();
-            Thread.sleep(2000);
+                element.click();
+                Thread.sleep(2000);
+                att.absentmarkoption().click();
+                Thread.sleep(2000);
 
-            System.out.println(Arrays.toString(att.presentCountTeacher().getText().split(" ")));
-            int totalcount = Integer.parseInt(att.totalCountTeacher().getText().split(" ")[2]);
-            int presentcount = Integer.parseInt(att.presentCountTeacher().getText().split(" ")[1]);
-            int absentcount = Integer.parseInt(att.absentCountTeacher().getText().split(" ")[1]);
-            int leavecount = Integer.parseInt(att.leaveCountTeacher().getText().split(" ")[1]);
-            System.out.println(totalcount+" "+presentcount+" "+absentcount+" "+leavecount);
-            return AttendancePALHValidateTest(totalcount == presentcount+absentcount+leavecount);
+                att.attendancemarkoption().click();
+                Thread.sleep(2000);
+                att.leavemarkoption().click();
+                Thread.sleep(2000);
+
+                att.saveBtn().click();
+                Thread.sleep(2000);
+                driver.findElement(By.xpath("//*[contains(@class,'active')]/*[contains(@class,'week-day')]")).click();
+                Thread.sleep(2000);
+
+                System.out.println(Arrays.toString(att.presentCountTeacher().getText().split(" ")));
+                int totalcount = Integer.parseInt(att.totalCountTeacher().getText().split(" ")[2]);
+                int presentcount = Integer.parseInt(att.presentCountTeacher().getText().split(" ")[1]);
+                int absentcount = Integer.parseInt(att.absentCountTeacher().getText().split(" ")[1]);
+                int leavecount = Integer.parseInt(att.leaveCountTeacher().getText().split(" ")[1]);
+
+                System.out.println(totalcount+" "+presentcount+" "+absentcount+" "+leavecount);
+                AttendancePALHValidateTest(totalcount == presentcount+absentcount+leavecount);
+            }
         }
+        return true;
     }
 
     // mark holiday
@@ -182,17 +190,15 @@ public class AttendanceMethods extends BaseLogin {
 
         boolean markedForToday = att.notMarkedTeacher().size() > 0;
 
-        if(!markedForToday){
+        if(markedForToday){
             att.markasholidayBtn().click();
             return MarkHolidayBtnValidateTest(att.holidayMarksTeacher().size(), Integer.parseInt(att.totalCountTeacher().getText().split(" ")[2]));
         }
         else{
             System.out.println("Attendance already marked for the day.");
-            att.markasholidayBtn().click();
-            boolean flag = MarkHolidayBtnValidateTest(att.holidayMarksTeacher().size(), Integer.parseInt(att.totalCountTeacher().getText().split(" ")[2]));
-            att.markasholidayBtn().click();
-            return flag;
+            return MarkHolidayBtnValidateTest(1,1);
         }
+
     }
     
     
@@ -223,13 +229,12 @@ public class AttendanceMethods extends BaseLogin {
         Thread.sleep(2000);
 
         int attendancePercentage = Integer.parseInt(att.AttendancePercentage().getText().split(" ")[1].split("%")[0]);
-        int totaldaysinmonth = att.AllDaysList().size();
 
-        int totalWorkingDays = totaldaysinmonth - NonWorkingDays.get(att.DisplayedMonthStudent().getText()) - att.holidayMarksStudent().size();
-
+        int totalClassesHeld = Integer.parseInt(List.of(att.heldCountStudent().getText().split(" ")).get(2));
         int numberOfPresentDays = att.presentMarksStudent().size();
-        return PercentageValidateTest((int)(((float)numberOfPresentDays/totalWorkingDays)*100), attendancePercentage);
-//        ValidateTest(Math.round((float)numberOfPresentDays/totalWorkingDays), attendancePercentage);
+        System.out.println(numberOfPresentDays+" "+totalClassesHeld);
+        return PercentageValidateTest((int)(((float)numberOfPresentDays/totalClassesHeld)*100), attendancePercentage);
+
     }
     
     // Pagination
@@ -265,6 +270,7 @@ public class AttendanceMethods extends BaseLogin {
 
         String CurrMonthDisplayed = att.DisplayedMonthStudent().getText();
         int monthindex = months.indexOf(CurrMonthDisplayed);
+
         boolean flag1, flag2, flag3;
         att.PaginationLeftBtn().click();
         flag1= ValidateMonth(att.DisplayedMonthStudent().getText(), months.get(monthindex-1));

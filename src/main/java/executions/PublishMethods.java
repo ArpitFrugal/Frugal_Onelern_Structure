@@ -94,13 +94,11 @@ public class PublishMethods extends BaseLogin {
 
     public boolean teacherPublishNewContentBtnCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.pub = new Publish(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
+        Thread.sleep(2000);
         pub.PublishToggle().click();
-        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishNewContentBtn()));
-
+        Thread.sleep(10000);
         pub.PublishNewContentBtn().click();
         Thread.sleep(2000);
         List<WebElement> tabs = pub.PublishNewContentTabs();
@@ -123,53 +121,47 @@ public class PublishMethods extends BaseLogin {
 
     public boolean studentPublishNewContentCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.pub = new Publish(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Long mob = Long.parseLong(mobNumber);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
+        Thread.sleep(2000);
         pub.PublishToggle().click();
-        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishContentOnTop()));
+        Thread.sleep(2000);
 
         String FirstContent = pub.PublishContentOnTop().getText();
         if (mob >= 9000000001l && mob <= 9000000020l) {
-            String GradeContent = map.get("Grade 1");
-            return NewContentValidateTest(FirstContent, GradeContent);
+            return NewContentValidateTest(FirstContent, "Grade 1 Content");
         }
 
         else if (mob >= 9000000021l && mob <= 9000000040l) {
-            String GradeContent = map.get("Grade 2");
-            return NewContentValidateTest(FirstContent, GradeContent);
+            return NewContentValidateTest(FirstContent, "Grade 2 Content");
         }
 
         else if (mob >= 9000000041l && mob <= 9000000060l) {
-            String GradeContent = map.get("Grade 3");
-            return NewContentValidateTest(FirstContent, GradeContent);
+            return NewContentValidateTest(FirstContent, "Grade 3 Content");
         }
 
         else if (mob >= 9000000061l && mob <= 9000000080l) {
-            String GradeContent = map.get("Grade 4");
-            return NewContentValidateTest(FirstContent, GradeContent);
+            return NewContentValidateTest(FirstContent, "Grade 4 Content");
         }
 
         else if (mob >= 9000000081l && mob <= 9000000100l) {
-            String GradeContent = map.get("Grade 5");
-            return NewContentValidateTest(FirstContent, GradeContent);
+            return NewContentValidateTest(FirstContent, "Grade 5 Content");
         }
+
         return false;
     }
 
 
     public boolean teacherPublishNewContentCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.pub = new Publish(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Long mob = Long.parseLong(mobNumber);
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
+        Thread.sleep(2000);
         pub.PublishToggle().click();
-        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishNewContentBtn()));
-
+        Thread.sleep(5000);
+        Thread.sleep(5000);
         pub.PublishNewContentBtn().click();
         Thread.sleep(5000);
 
@@ -186,15 +178,16 @@ public class PublishMethods extends BaseLogin {
             i+=1;
             Thread.sleep(2000);
         }
+
         Thread.sleep(3000);
 
         if(mob >= 9000000101l && mob <= 9000000104l){
-            String publishContent = "Grade 1 Content " + Publish.contentSequenceCounter;
+            String publishContent = "Grade 1 Content";
             map.put("Grade 1",publishContent);
 
             pub.PublishContentDescriptionTextArea().click();
             pub.PublishContentDescriptionTextArea().sendKeys(publishContent);
-            wait.until(ExpectedConditions.elementToBeClickable(pub.NextStepBtn()));
+            Thread.sleep(3000);
             pub.NextStepBtn().click();
             Thread.sleep(3000);
             List<WebElement> GradeSectionInput = pub.PublishGradeSectionInput();
@@ -203,44 +196,18 @@ public class PublishMethods extends BaseLogin {
                 webElement.sendKeys(Keys.ARROW_DOWN);
                 webElement.sendKeys(Keys.ENTER);
             }
-            wait.until(ExpectedConditions.elementToBeClickable(pub.FinalPublishBtn()));
+            Thread.sleep(3000);
             pub.FinalPublishBtn().click();
-            wait.until(ExpectedConditions.elementToBeClickable(pub.BackAfterPublish()));
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             pub.BackAfterPublish().click();
-            Thread.sleep(3000);
+
             String actual_time = pub.FirstContentTime().getText();
             String expected_time = "a minute ago a few seconds ago";
             return NewContentValidateTest(actual_time, expected_time);
         }
         else if (mob >= 9000000105l && mob <= 9000000108l) {
-            String publishContent = "Grade 2 Content " + Publish.contentSequenceCounter;
+            String publishContent = "Grade 2 Content";
             map.put("Grade 2",publishContent);
-
-            pub.PublishContentDescriptionTextArea().click();
-            pub.PublishContentDescriptionTextArea().sendKeys(publishContent);
-            wait.until(ExpectedConditions.elementToBeClickable(pub.NextStepBtn()));
-            pub.NextStepBtn().click();
-            Thread.sleep(3000);
-            List<WebElement> GradeSectionInput = pub.PublishGradeSectionInput();
-            for(WebElement webElement : GradeSectionInput){
-                webElement.click();
-                webElement.sendKeys(Keys.ARROW_DOWN);
-                webElement.sendKeys(Keys.ENTER);
-            }
-            wait.until(ExpectedConditions.elementToBeClickable(pub.FinalPublishBtn()));
-            pub.FinalPublishBtn().click();
-            wait.until(ExpectedConditions.elementToBeClickable(pub.BackAfterPublish()));
-            pub.BackAfterPublish().click();
-
-            String actual_time = pub.FirstContentTime().getText();
-            String expected_time = "a minute ago a few seconds ago";
-            return NewContentValidateTest(actual_time, expected_time);
-        }
-
-        else if (mob >= 9000000109l && mob <= 9000000112l) {
-            String publishContent = "Grade 3 Content " + Publish.contentSequenceCounter;
-            map.put("Grade 3",publishContent);
 
             pub.PublishContentDescriptionTextArea().click();
             pub.PublishContentDescriptionTextArea().sendKeys(publishContent);
@@ -263,8 +230,33 @@ public class PublishMethods extends BaseLogin {
             return NewContentValidateTest(actual_time, expected_time);
         }
 
+        else if (mob >= 9000000109l && mob <= 9000000112l) {
+            String publishContent = "Grade 3 Content";
+            map.put("Grade 3",publishContent);
+
+            pub.PublishContentDescriptionTextArea().click();
+            pub.PublishContentDescriptionTextArea().sendKeys(publishContent);
+            Thread.sleep(3000);
+            pub.NextStepBtn().click();
+            Thread.sleep(3000);
+            List<WebElement> GradeSectionInput = pub.PublishGradeSectionInput();
+            for(WebElement webElement : GradeSectionInput){
+                webElement.click();
+                webElement.sendKeys(Keys.ARROW_DOWN);
+                webElement.sendKeys(Keys.ENTER);
+            }
+            Thread.sleep(3000);
+            pub.FinalPublishBtn().click();
+            Thread.sleep(5000);
+            pub.BackAfterPublish().click();
+
+            String actual_time = pub.FirstContentTime().getText();
+            String expected_time = "a minute ago a few seconds ago" ;
+            return NewContentValidateTest(actual_time, expected_time);
+        }
+
         else if (mob >= 9000000113l && mob <= 9000000116l) {
-            String publishContent = "Grade 4 Content " + Publish.contentSequenceCounter;
+            String publishContent = "Grade 4 Content";
             map.put("Grade 4",publishContent);
 
             pub.PublishContentDescriptionTextArea().click();
@@ -289,7 +281,7 @@ public class PublishMethods extends BaseLogin {
         }
 
         else if (mob >= 9000000117l && mob <= 9000000120l) {
-            String publishContent = "Grade 5 Content " + Publish.contentSequenceCounter;
+            String publishContent = "Grade 5 Content";
             map.put("Grade 5",publishContent);
 
             pub.PublishContentDescriptionTextArea().click();
@@ -312,6 +304,7 @@ public class PublishMethods extends BaseLogin {
             String expected_time = "a minute ago a few seconds ago";
             return NewContentValidateTest(actual_time, expected_time);
         }
+
         return false;
     }
 
@@ -328,23 +321,20 @@ public class PublishMethods extends BaseLogin {
     }
 
     public boolean studentPublishViewsandLikes(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        boolean flag1, flag2;
         this.pub = new Publish(driver);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        Long mob = Long.parseLong(mobNumber);
+        boolean flag1, flag2;
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
-        wait.until(ExpectedConditions.elementToBeClickable(pub.PublishToggle()));
+        Thread.sleep(2000);
         pub.PublishToggle().click();
-        wait.until(ExpectedConditions.elementToBeClickable(pub.OutsideViewCount()));
+        Thread.sleep(2000);
 
         String PrevViewCount = pub.OutsideViewCount().getText();
-        wait.until(ExpectedConditions.elementToBeClickable(pub.ContentMetaData()));
+        Thread.sleep(2000);
         pub.ContentMetaData().click();
-        wait.until(ExpectedConditions.elementToBeClickable(pub.InsideViewCount()));
         Thread.sleep(2000);
         String CurrViewCount = pub.InsideViewCount().getText();
-        wait.until(ExpectedConditions.elementToBeClickable(pub.LikeCount()));
+        Thread.sleep(2000);
         String PrevLikeCount = pub.LikeCount().getText();
         Thread.sleep(2000);
         flag1 = ViewsandLikesValidateTest(Integer.parseInt(CurrViewCount), Integer.parseInt(PrevViewCount) +1);
@@ -390,56 +380,60 @@ public class PublishMethods extends BaseLogin {
     }
 
     public boolean studentPublishPagination(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        boolean flag1 = true, flag2 = true, flag3 = true, flag4 = true;
         this.pub = new Publish(driver);
+        boolean flag1 = true, flag2 = true, flag3 = true, flag4 = true;
         String CurrPaginationText;
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
         Thread.sleep(2000);
+
         pub.PublishToggle().click();
         Thread.sleep(10000);
 
         int i=0;
         // one click forward
-        if(CheckEnabled(pub.NextNavigate())){
-            pub.NextNavigate().click(); Thread.sleep(2000);
+        if(CheckEnabled(pub.StudentNextNavigate())){
+            pub.StudentNextNavigate().click(); Thread.sleep(2000);
             i+=1;
             CurrPaginationText = pub.PaginationText().getText(); Thread.sleep(2000);
             flag1= PaginationValidateTest(CurrPaginationText, list.get(i)); Thread.sleep(2000);
         }
 
         // two clicks forward
-        if(CheckEnabled(pub.NextNavigate())) {
-            pub.NextNavigate().click(); Thread.sleep(2000);
+        if(CheckEnabled(pub.StudentNextNavigate())) {
+            pub.StudentNextNavigate().click(); Thread.sleep(2000);
             i+=1;
-            if(CheckEnabled(pub.NextNavigate())){
-                pub.NextNavigate().click(); Thread.sleep(2000);
+            if(CheckEnabled(pub.StudentNextNavigate())){
+                pub.StudentNextNavigate().click();
                 i+=1;
             }
+            Thread.sleep(2000);
             CurrPaginationText = pub.PaginationText().getText(); Thread.sleep(2000);
             flag2= PaginationValidateTest(CurrPaginationText, list.get(i)); Thread.sleep(2000);
         }
 
 
+
         // one click back
-        if(CheckEnabled(pub.BackNavigate())){
-            pub.BackNavigate().click(); Thread.sleep(2000);
+        if(CheckEnabled(pub.StudentBackNavigate())){
+            pub.StudentBackNavigate().click(); Thread.sleep(2000);
             i-=1;
             CurrPaginationText = pub.PaginationText().getText();
             flag3= PaginationValidateTest(CurrPaginationText, list.get(i));
         }
 
         // two click back
-        if(CheckEnabled(pub.BackNavigate())){
-            pub.BackNavigate().click(); Thread.sleep(2000);
+        if(CheckEnabled(pub.StudentBackNavigate())){
+            pub.StudentBackNavigate().click(); Thread.sleep(2000);
             i-=1;
-            if(CheckEnabled(pub.BackNavigate())){
-                pub.BackNavigate().click(); Thread.sleep(2000);
+            if(CheckEnabled(pub.StudentBackNavigate())){
+                pub.StudentBackNavigate().click(); Thread.sleep(2000);
                 i-=1;
             }
             CurrPaginationText = pub.PaginationText().getText();
             flag4= PaginationValidateTest(CurrPaginationText, list.get(i));
         }
+
 
 
         if(flag1 && flag2 && flag3 && flag4){
@@ -452,9 +446,10 @@ public class PublishMethods extends BaseLogin {
     }
 
     public boolean teacherPublishPagination(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
+        this.pub = new Publish(driver);
         boolean flag1 = true, flag2 = true, flag3 = true, flag4 = true;
         String CurrPaginationText;
-        this.pub = new Publish(driver);
+
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
         Thread.sleep(2000);
@@ -481,6 +476,7 @@ public class PublishMethods extends BaseLogin {
             CurrPaginationText = pub.PaginationText().getText(); Thread.sleep(2000);
             flag2= PaginationValidateTest(CurrPaginationText, list.get(i)); Thread.sleep(2000);
         }
+
 
 
         // one click back
@@ -519,11 +515,12 @@ public class PublishMethods extends BaseLogin {
         return Integer.parseInt(pagination_text.get(pagination_text.size() - 1));
     }
     public boolean studentPublishTeacherFilter(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        boolean flag1 = true, flag2 = true;
         this.pub = new Publish(driver);
-        js = (JavascriptExecutor) driver;
+        boolean flag1 = true, flag2 = true;
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
+        Thread.sleep(2000);
+        pub.StudentImageClick().click();
         Thread.sleep(2000);
         pub.PublishToggle().click();
         Thread.sleep(10000);
@@ -554,7 +551,6 @@ public class PublishMethods extends BaseLogin {
                 }
             }
         }
-
         if(flag1 && flag2){
             System.out.println("PASSED");
             return true;
@@ -570,8 +566,8 @@ public class PublishMethods extends BaseLogin {
         return element.contains(selectedSubject);
     }
     public boolean teacherSubjectLessonCategoryFilters(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
-        boolean flag1= true, flag2 = true, flag3 = true;
         this.pub = new Publish(driver);
+        boolean flag1= true, flag2 = true, flag3 = true;
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("teacher", mobNumber, password);
         Thread.sleep(2000);
@@ -630,9 +626,5 @@ public class PublishMethods extends BaseLogin {
             return false;
         }
     }
-
-
-
-
 
 }
