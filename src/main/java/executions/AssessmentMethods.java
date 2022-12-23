@@ -788,6 +788,7 @@ public class AssessmentMethods extends BaseLogin {
         ass.DraftsTabPage().click();
 
         int no_of_assessments =ass.AssessmentCards().size();
+        System.out.println(no_of_assessments);
         if(no_of_assessments > 0){
             flag1= ValueCompare(no_of_assessments, ass.DraftPublishBtn().size());
 
@@ -801,9 +802,11 @@ public class AssessmentMethods extends BaseLogin {
             Thread.sleep(1000);
             ass.deleteDraft().click();
             Thread.sleep(2000);
-            ass.DraftsTabPage().click();
-            Thread.sleep(1000);
-            flag3 = ValueCompare(no_of_assessments -1, ass.AssessmentCards().size());
+            driver.findElement(By.xpath("//*[contains(@class,'modal-footer')]//button[2]")).click();
+//            ass.DraftsTabPage().click();
+            Thread.sleep(2000);
+            List<WebElement> assessmentcards = ass.AssessmentCards();
+            flag3 = ValueCompare(no_of_assessments -1, assessmentcards.size());
 
             return DraftsCheckValidateTest(flag1, flag2, flag3);
         }

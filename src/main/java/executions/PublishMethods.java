@@ -368,7 +368,7 @@ public class PublishMethods extends BaseLogin {
     }
 
     // Pagination
-    List<String> list = List.of("1 - 10", "11 - 20", "21 - 30", "31 - 40", "41 - 50", "51 - 60", "61 - 70", "71 - 80", "81 - 90", "91 - 100", "101 - 120");
+    List<String> list = List.of("1 - ", "11 - ", "21 - ", "31 - ", "41 - ", "51 - ", "61 - ", "71 - ", "81 - ", "91 - ", "101 - ");
 
     public boolean CheckEnabled(WebElement nextNavigate) {
         return !nextNavigate.getAttribute("class").contains("disabled");
@@ -385,6 +385,8 @@ public class PublishMethods extends BaseLogin {
         String CurrPaginationText;
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
+        Thread.sleep(2000);
+        pub.StudentImageClick().click();
         Thread.sleep(2000);
 
         pub.PublishToggle().click();
@@ -403,10 +405,10 @@ public class PublishMethods extends BaseLogin {
         if(CheckEnabled(pub.StudentNextNavigate())) {
             pub.StudentNextNavigate().click(); Thread.sleep(2000);
             i+=1;
-            if(CheckEnabled(pub.StudentNextNavigate())){
-                pub.StudentNextNavigate().click();
-                i+=1;
-            }
+//            if(CheckEnabled(pub.StudentNextNavigate())){
+//                pub.StudentNextNavigate().click();
+//                i+=1;
+//            }
             Thread.sleep(2000);
             CurrPaginationText = pub.PaginationText().getText(); Thread.sleep(2000);
             flag2= PaginationValidateTest(CurrPaginationText, list.get(i)); Thread.sleep(2000);
@@ -426,14 +428,9 @@ public class PublishMethods extends BaseLogin {
         if(CheckEnabled(pub.StudentBackNavigate())){
             pub.StudentBackNavigate().click(); Thread.sleep(2000);
             i-=1;
-            if(CheckEnabled(pub.StudentBackNavigate())){
-                pub.StudentBackNavigate().click(); Thread.sleep(2000);
-                i-=1;
-            }
             CurrPaginationText = pub.PaginationText().getText();
             flag4= PaginationValidateTest(CurrPaginationText, list.get(i));
         }
-
 
 
         if(flag1 && flag2 && flag3 && flag4){
@@ -465,14 +462,10 @@ public class PublishMethods extends BaseLogin {
             flag1= PaginationValidateTest(CurrPaginationText, list.get(i)); Thread.sleep(2000);
         }
 
-        // two clicks forward
+        // two click forward
         if(CheckEnabled(pub.NextNavigate())) {
             pub.NextNavigate().click(); Thread.sleep(2000);
             i+=1;
-            if(CheckEnabled(pub.NextNavigate())){
-                pub.NextNavigate().click(); Thread.sleep(2000);
-                i+=1;
-            }
             CurrPaginationText = pub.PaginationText().getText(); Thread.sleep(2000);
             flag2= PaginationValidateTest(CurrPaginationText, list.get(i)); Thread.sleep(2000);
         }
@@ -491,10 +484,11 @@ public class PublishMethods extends BaseLogin {
         if(CheckEnabled(pub.BackNavigate())){
             pub.BackNavigate().click(); Thread.sleep(2000);
             i-=1;
-            if(CheckEnabled(pub.BackNavigate())){
-                pub.BackNavigate().click(); Thread.sleep(2000);
-                i-=1;
-            }
+//            if(CheckEnabled(pub.BackNavigate())) {
+//                pub.BackNavigate().click();
+//                Thread.sleep(2000);
+//                i -= 1;
+//            }
             CurrPaginationText = pub.PaginationText().getText();
             flag4= PaginationValidateTest(CurrPaginationText, list.get(i));
         }

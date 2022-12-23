@@ -404,11 +404,14 @@ Thread.sleep(2000);
     }
 
     public boolean studentFilterFunctionalityCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
+        this.dou = new Doubts(driver);
         boolean flag1 = false, flag2 = false, flag3 = false;
         int no_of_doubts;
         String selectedFilterSubject;
         BaseLogin user = new BaseLogin(driver);
         user.userLogin("student", mobNumber, password);
+        Thread.sleep(2000);
+        dou.StudentImageClick().click();
         Thread.sleep(2000);
         dou.DoubtsToggle().click();
         Thread.sleep(2000);
@@ -473,6 +476,7 @@ Thread.sleep(2000);
     }
 
     public boolean teacherFilterFunctionalityCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
+        this.dou = new Doubts(driver);
         boolean flag1 = false, flag2 = false, flag3 = false;
         int no_of_doubts;
         String selectedFilterSubject;
@@ -482,13 +486,14 @@ Thread.sleep(2000);
         dou.DoubtsToggle().click();
         Thread.sleep(2000);
 
+        driver.findElement(By.xpath("//label[contains(text(),'Grade 1')]")).click();
 
-        dou.FilterSubjectFirstSubject_Teacher().click();
-        Thread.sleep(1000);
-        dou.FilterSubjectSecondSubject_Teacher().click();
-        Thread.sleep(1000);
-        dou.FilterSubjectThirdSubject_Teacher().click();
-        Thread.sleep(1000);
+//        dou.FilterSubjectFirstSubject_Teacher().click();
+//        Thread.sleep(1000);
+//        dou.FilterSubjectSecondSubject_Teacher().click();
+//        Thread.sleep(1000);
+//        dou.FilterSubjectThirdSubject_Teacher().click();
+//        Thread.sleep(1000);
 
         dou.FilterSubjectFirstSubject_Teacher().click();
         Thread.sleep(5000);

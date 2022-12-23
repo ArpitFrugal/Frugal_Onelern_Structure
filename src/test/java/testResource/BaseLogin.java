@@ -1,12 +1,10 @@
 package testResource;
 
-import java.io.IOException;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import resources.Base;
-import pageObjects.Library;
 import pageObjects.LoginPage;
+import resources.Base;
+
+import java.io.IOException;
 
 public class BaseLogin extends Base {
 
@@ -21,7 +19,7 @@ public class BaseLogin extends Base {
 	public void userLogin(String user, String mobNumber, String pass) throws IOException, InterruptedException {
 		log = new LoginPage(driver);
 
-		if (user == "teacher") {
+		if(user.equals("teacher")) {
 			log.getTeacherSignIn().click();
 			log.getUserName().sendKeys(mobNumber);
 			log.getSubmitButton().click();
@@ -31,7 +29,28 @@ public class BaseLogin extends Base {
 			Thread.sleep(5000);
 			log.getPasswordButton().click();
 			Thread.sleep(5000);
-		} else {
+		}
+		else if (user.equals("projectadmin")) {
+			log.getOthersSignIn().click();
+			log.userEmailID().click();
+			log.userEmailID().sendKeys(mobNumber);
+			Thread.sleep(1000);
+			log.PasswordInput().click();
+			log.PasswordInput().sendKeys(pass);
+			Thread.sleep(1000);
+			log.adminLoginBtn().click();
+		}
+		else if (user.equals("schooladmin")) {
+//			log.getOthersSignIn().click();
+			log.userEmailID().click();
+			log.userEmailID().sendKeys(mobNumber);
+			Thread.sleep(1000);
+			log.PasswordInput().click();
+			log.PasswordInput().sendKeys(pass);
+			Thread.sleep(1000);
+			log.adminLoginBtn().click();
+		}
+		else {
 			log.getStudentSignIn().click();
 			log.getUserName().sendKeys(mobNumber);
 			log.getSubmitButton().click();
@@ -40,6 +59,8 @@ public class BaseLogin extends Base {
 			log.getPassword().sendKeys(pass);
 			Thread.sleep(5000);
 			log.getPasswordButton().click();
+			Thread.sleep(5000);
+			log.StudentImageClick().click();
 			Thread.sleep(5000);
 		}
 

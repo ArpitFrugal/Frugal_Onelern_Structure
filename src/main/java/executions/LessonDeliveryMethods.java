@@ -556,7 +556,7 @@ public class LessonDeliveryMethods extends BaseLogin {
     }
 
     public boolean GradeValidateTest(String actual_grade, String expected_grade){
-        if (actual_grade.equals(expected_grade)) {
+        if (actual_grade.contains(expected_grade)) {
             System.out.println("PASSED");
             return true;
         } else {
@@ -1046,7 +1046,7 @@ public class LessonDeliveryMethods extends BaseLogin {
     }
 
     public boolean TeacherLandingValidateTest(String actual_header){
-        if (actual_header.equals("Lesson Delivery")) {
+        if (actual_header.contains("Lesson Delivery")) {
             System.out.println("Lesson Delivery Module is active");
             return true;
         }
@@ -1299,46 +1299,64 @@ public class LessonDeliveryMethods extends BaseLogin {
         ThreadSleep5000();
         ld.LessonDeliveryToggle().click();
         ThreadSleep5000();
-
-        // Scrolling Page
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        String ExpectedLessonPlanName, ActualLessonPlanName;
-        boolean flag1, flag2, flag3;
 
+        String blackColor = "#131536";
+        String blueColor = "rgba(71, 75, 255, 1)";
+        boolean flag1, flag2, flag3, flag4;
+        String classname;
+        WebElement expandedComponent;
         if (mob >= 9000000101l && mob <= 9000000104l) { // Environmental Studies Coursebook - Part A
             ld.EnvironmentalcoursebookGrade1().click();
             ThreadSleep5000();
 
-//          Lesson -1
             ld.FirstLesson().click();
             Thread.sleep(1000);
 
             ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 1.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
-
-            flag1 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-//          Lesson -2
-            ld.SecondLesson().click();
+            Thread.sleep(2000);
+            WebElement FirstComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button"));
+            if(!String.valueOf(FirstComponent.getClass()).contains("collapsed")){
+                ld.TeachComponent().click();
+            }
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.TeachComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag1 = expandedComponent.isDisplayed();
+//            flag1 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.TeachComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 2.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag2 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-
-//          Lesson -3
-            ld.ThirdLesson().click();
+            ld.ApplyComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ApplyComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag2 = expandedComponent.isDisplayed();
+//            flag2 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.ApplyComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 3.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag3 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
+            ld.AssessComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.AssessComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag3 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.AssessComponent().click();
+
+            Thread.sleep(2000);
+
+            ld.ReviewComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ReviewComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag4 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.ReviewComponent().click();
 
             return LessonPlanNameValidateTest(flag1, flag2, flag3);
         }
@@ -1349,37 +1367,53 @@ public class LessonDeliveryMethods extends BaseLogin {
             ThreadSleep5000();
             element.click();
 
-//          Lesson -1
             ld.FirstLesson().click();
             Thread.sleep(1000);
 
             ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 1.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
-
-            flag1 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-
-//          Lesson -2
-            ld.SecondLesson().click();
+            Thread.sleep(2000);
+            WebElement FirstComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button"));
+            if(!String.valueOf(FirstComponent.getClass()).contains("collapsed")){
+                ld.TeachComponent().click();
+            }
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.TeachComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag1 = expandedComponent.isDisplayed();
+//            flag1 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.TeachComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 2.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag2 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-
-//          Lesson -3
-            ld.ThirdLesson().click();
+            ld.ApplyComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ApplyComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag2 = expandedComponent.isDisplayed();
+//            flag2 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.ApplyComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 3.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag3 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
+            ld.AssessComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.AssessComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag3 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.AssessComponent().click();
+
+            Thread.sleep(2000);
+
+            ld.ReviewComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ReviewComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag4 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.ReviewComponent().click();
 
             return LessonPlanNameValidateTest(flag1, flag2, flag3);
         }
@@ -1390,37 +1424,53 @@ public class LessonDeliveryMethods extends BaseLogin {
             Thread.sleep(3000);
             element.click();
 
-//          Lesson -1
             ld.FirstLesson().click();
             Thread.sleep(1000);
 
             ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 1.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
-
-            flag1 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-
-//          Lesson -2
-            ld.SecondLesson().click();
+            Thread.sleep(2000);
+            WebElement FirstComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button"));
+            if(!String.valueOf(FirstComponent.getClass()).contains("collapsed")){
+                ld.TeachComponent().click();
+            }
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.TeachComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag1 = expandedComponent.isDisplayed();
+//            flag1 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.TeachComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 2.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag2 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-
-//          Lesson -3
-            ld.ThirdLesson().click();
+            ld.ApplyComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ApplyComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag2 = expandedComponent.isDisplayed();
+//            flag2 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.ApplyComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 3.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag3 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
+            ld.AssessComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.AssessComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag3 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.AssessComponent().click();
+
+            Thread.sleep(2000);
+
+            ld.ReviewComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ReviewComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag4 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.ReviewComponent().click();
 
             return LessonPlanNameValidateTest(flag1, flag2, flag3);
         }
@@ -1432,37 +1482,53 @@ public class LessonDeliveryMethods extends BaseLogin {
             element.click();
             ThreadSleep5000();
 
-//          Lesson -1
             ld.FirstLesson().click();
             Thread.sleep(1000);
 
             ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 1.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
-
-            flag1 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-
-//          Lesson -2
-            ld.SecondLesson().click();
+            Thread.sleep(2000);
+            WebElement FirstComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button"));
+            if(!String.valueOf(FirstComponent.getClass()).contains("collapsed")){
+                ld.TeachComponent().click();
+            }
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.TeachComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag1 = expandedComponent.isDisplayed();
+//            flag1 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.TeachComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 2.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag2 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-
-//          Lesson -3
-            ld.ThirdLesson().click();
+            ld.ApplyComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ApplyComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag2 = expandedComponent.isDisplayed();
+//            flag2 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.ApplyComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 3.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag3 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
+            ld.AssessComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.AssessComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag3 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.AssessComponent().click();
+
+            Thread.sleep(2000);
+
+            ld.ReviewComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ReviewComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag4 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.ReviewComponent().click();
 
             return LessonPlanNameValidateTest(flag1, flag2, flag3);
         }
@@ -1474,37 +1540,53 @@ public class LessonDeliveryMethods extends BaseLogin {
             element.click();
             ThreadSleep5000();
 
-//          Lesson -1
             ld.FirstLesson().click();
             Thread.sleep(1000);
 
             ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 1.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
-
-            flag1 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-
-//          Lesson -2
-            ld.SecondLesson().click();
+            Thread.sleep(2000);
+            WebElement FirstComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button"));
+            if(!String.valueOf(FirstComponent.getClass()).contains("collapsed")){
+                ld.TeachComponent().click();
+            }
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.TeachComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag1 = expandedComponent.isDisplayed();
+//            flag1 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.TeachComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 2.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag2 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
-            ld.BackButton().click();
-
-//          Lesson -3
-            ld.ThirdLesson().click();
+            ld.ApplyComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ApplyComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag2 = expandedComponent.isDisplayed();
+//            flag2 = ClassCheck(classname, "collapsed");
             Thread.sleep(1000);
+            ld.ApplyComponent().click();
 
-            ld.FirstLearningPlan().click();
-            ExpectedLessonPlanName = "Learning Plan 3.1";
-            ActualLessonPlanName = ld.WorkbookHeading().getText();
+            Thread.sleep(2000);
 
-            flag3 = CheckHeading(ExpectedLessonPlanName, ActualLessonPlanName);
+            ld.AssessComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.AssessComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]//button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag3 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.AssessComponent().click();
+
+            Thread.sleep(2000);
+
+            ld.ReviewComponent().click();
+            Thread.sleep(5000);
+            classname = String.valueOf(ld.ReviewComponent().getAttribute("class"));
+            expandedComponent = driver.findElement(By.xpath("//*[contains(@class,'accordion-header')]// button[not(contains(@class,'collapsed')) and @aria-expanded='true']"));
+            flag4 = expandedComponent.isDisplayed();
+            Thread.sleep(1000);
+            ld.ReviewComponent().click();
 
             return LessonPlanNameValidateTest(flag1, flag2, flag3);
         }
@@ -1513,7 +1595,7 @@ public class LessonDeliveryMethods extends BaseLogin {
 
     public boolean ColorCheck(String actual, String expected){
         System.out.println(actual+" "+expected);
-        return actual.equals(expected);
+        return actual.contains(expected);
     }
     public boolean LessonPlanComponentsValidateTest(boolean flag1, boolean flag2, boolean flag3, boolean flag4) {
         System.out.println(flag1+" "+flag2+" "+flag3+" "+flag4);
@@ -2060,7 +2142,7 @@ public class LessonDeliveryMethods extends BaseLogin {
 
     public boolean WorkbookNameValidateTest(String expected_text, String actual_text){
         System.out.println(actual_text+" "+expected_text);
-        if(actual_text.equals(expected_text)){
+        if(actual_text.contains(expected_text)){
             System.out.println("PASSED");
             return true;
         }

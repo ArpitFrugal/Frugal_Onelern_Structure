@@ -246,7 +246,7 @@ public class UserManagementMethods extends BaseLogin {
         Thread.sleep(1000);
 
         usm.LicensesModule().click();
-
+        Thread.sleep(2000);
         usm.AddLicenseBtn().click();
 
         String LicenseName = "New License";
@@ -458,10 +458,10 @@ public class UserManagementMethods extends BaseLogin {
         String currmonth = str.split("/")[1];
         String curryear = str.split("/")[2];
 
-        usm.StudentDOB().click();
-        usm.StudentDOB().sendKeys(currdate);
-        usm.StudentDOB().sendKeys(currmonth);
-        usm.StudentDOB().sendKeys(curryear);
+//        usm.StudentDOB().click();
+//        usm.StudentDOB().sendKeys(currdate);
+//        usm.StudentDOB().sendKeys(currmonth);
+//        usm.StudentDOB().sendKeys(curryear);
 
         usm.StudentGender().click();
         Thread.sleep(1000);
@@ -477,9 +477,9 @@ public class UserManagementMethods extends BaseLogin {
         usm.ParentMobileNumber().sendKeys("9876543210");
         Thread.sleep(1000);
         js.executeScript("arguments[0].scrollIntoView();", usm.CurrentAddress());
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         usm.NextStep().click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         js.executeScript("window.scrollBy(0,-350)", "");
         Thread.sleep(1000);
 
@@ -627,7 +627,7 @@ public class UserManagementMethods extends BaseLogin {
             return false;
         }
     }
-    List<String> paginationpage = List.of("1-15", "16-30", "31-45", "46-60", "61-75");
+    List<String> paginationpage = List.of("1-", "16-", "31-", "46-", "61-");
 
     public boolean AdminStudentPaginationCheck(WebDriver driver, String mobNumber, String password) throws IOException, InterruptedException {
         this.usm = new UserManagement(driver);
